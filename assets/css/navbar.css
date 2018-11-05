@@ -55,9 +55,8 @@
   }
 
   .navbar {
-      display: grid;
-      grid-template-columns: 1500px;
-      grid-template-rows: 1fr 1fr 1fr 1fr;
+      max-width: 1200px;
+      margin: auto;
   }
 
   .content-navbar {
