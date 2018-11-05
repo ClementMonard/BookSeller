@@ -28,4 +28,8 @@ form .form-icons {
   h4 {
     font-family: 'Open Sans', sans-serif;
   }
+
+  .text-danger {
+    color:red;
+  }
   

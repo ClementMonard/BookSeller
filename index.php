@@ -13,7 +13,8 @@
         <header>
         <?php include 'views/header3.php'; ?>
         </header>
-        <?php include 'formLogin.php';
+        <?php 
+              include 'formLogin.php';
               include 'formRegistration.php';  
         ?>
     </body>

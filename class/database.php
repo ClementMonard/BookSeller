@@ -16,7 +16,9 @@ class database {
         $this->charset = CHARSET;
         $this->account = ACCOUNT;
         $this->password = PASSWORD;
+    }
 
+     protected function dbConnection(){
         try {
             $this->db = new PDO('mysql:host=' . $this->host . ';port=3306;dbname=' . $this->dbname . ';charset=UTF8;', $this->account, $this->password);
         } catch (Exception $e) {
@@ -24,6 +26,7 @@ class database {
         }
     
     }
+
     public function __destruct() {
         $this->db = NULL;
     }
