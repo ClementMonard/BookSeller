@@ -1,8 +1,8 @@
 <?php
 session_start();
-include 'controllers/headerCtrl.php';
-include 'formLogin.php';
-include 'formRegistration.php';  
+include_once 'controllers/headerCtrl.php';
+include_once 'formLogin.php';
+include_once 'formRegistration.php';  
 ?>
 <head>
     <meta charset="utf-8">
@@ -15,16 +15,15 @@ include 'formRegistration.php';
 </head>
 <div class="navbar">
     <ul class="menu menu-hover-lines">
-        <li class="content-navbar active"><a href="#">BookSeller</a></li>
-        <li><a href="views/literarygenres.php">Genres Littéraires</a></li>
+        <li class="content-navbar"><a href="index.php">BookSeller</a></li>
+        <li class="content-navbar"><a href="typeofbooks.php">Genres Littéraires</a></li>
         <li><a href="../application.php">Comment BookSeller</a></li>
-        <li><a href="../citations.php">Citations</a></li>
         <?php if (!isset($_SESSION['isConnect'])) { ?>
         <li><a href="#" data-open="modalLogin">Se connecter</a></li>
         <li><a href="#" data-open="modalRegistation">S'inscrire</a></li>
         <?php } else { ?>
         <li><a href="oui.php">Mon compte</a></li>
-        <li><a href="index.php?action=disconnect">Se déconnecter</a></li>
+        <li><a href="index.php?action=disconnect">Déconnexion</a></li>
         <?php } ?>
     </ul>
 </div>

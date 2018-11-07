@@ -55,8 +55,10 @@
   }
 
   .navbar {
-      max-width: 1200px;
+      max-width: 840px;
       margin: auto;
+      text-align: center;
+      background-color: lightgrey;
   }
 
   .content-navbar {

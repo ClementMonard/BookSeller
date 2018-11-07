@@ -14,14 +14,20 @@
                 </span>
                 <input class="input-group-field" type="text" name="name" id="name" placeholder="Identifiant" />
             </div>
-            <p class="text-danger"><?= isset($formError['name']) ? $formError['name'] : '' ?></p>
+            <?php
+            if (isset($formError['name'])) { ?> 
+                <p class="text-danger"><?= $formError['name'] ?></p>
+            <?php } ?>            
             <div class="input-group">
                 <span class="input-group-label">
                     <i class="fa fa-envelope"></i>
                 </span>
                 <input class="input-group-field" type="email" name="mail" id="mail" placeholder="Email" />
             </div>
-            <p class="text-danger"><?= isset($formError['mail']) ? $formError['mail'] : '' ?></p>
+            <?php
+            if (isset($formError['mail'])) { ?> 
+                <p class="text-danger"><?= $formError['mail'] ?></p>
+            <?php } ?>
             <div class="input-group">
                 <span class="input-group-label">
                     <i class="fa fa-key"></i>
@@ -35,7 +41,10 @@
                 <input class="input-group-field" name="passwordVerify" id="passwordVerify" type="password"
                     placeholder="Confirmation mot de passe" />
             </div>
-            <p class="text-danger"><?= isset($formError['password']) ? $formError['password'] : '' ?></p>
+            <?php
+            if (isset($formError['password'])) { ?> 
+                <p class="text-danger"><?= $formError['password'] ?></p>
+            <?php } ?>
             <button class="button expanded" type="submit" name="submitForm">S'inscrire</button>
         </div>
     </form>

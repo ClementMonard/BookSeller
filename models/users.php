@@ -15,6 +15,10 @@ class users extends database {
         $this->dbConnection();
     }
 
+    /**
+     * Function that can add a registration of a new user in the database
+     */
+
     public function addUserToDatabase(){
         $query = 'INSERT INTO `DZOPD_users` (`name`, `mail`, `password`) VALUES (:name, :mail, :password)';
         $result = $this->db->prepare($query);
@@ -24,6 +28,12 @@ class users extends database {
         return $result->execute();
     }
     
+
+    /**
+     * Function that check if a user with the same username already exists in the database.
+     * @return boolean
+     */
+
     public function checkingIfTheUserAlreadyExists(){
         $state = false;
         $query = 'SELECT COUNT(`id`) AS `count` FROM `DZOPD_users` WHERE `name` = :name';
@@ -35,6 +45,12 @@ class users extends database {
         }
         return $state;
     }
+
+
+    /**
+     * Function that can grant the possibility for the user to be connected at his account.
+     * @return boolean
+     */
 
     public function UserConnectingToHisAccount() {
         $state = false;

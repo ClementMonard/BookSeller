@@ -11,7 +11,7 @@ if (isset($_POST['submitLoginForm'])) {
         if (!preg_match($regexName, $name)) {
             $formError['name'] = 'Caractères invalides';
         }
-    }else{
+    }else {
         $formError['name'] = 'Champs obligatoire.';
     }
 
