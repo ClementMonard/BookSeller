@@ -3,25 +3,31 @@
     include_once 'controllers/loginCtrl.php';
 ?>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<div id="modalLogin" class="reveal" data-reveal>
-    <form method="POST" action="#">
+<div id="modalLogin" class="modal">
+    <form method="POST" action="#" id="loginForm">
         <div class="form-icons">
-            <h4>Se connecter</h4>
-            <div class="input-group">
-                <span class="input-group-label">
-                    <i class="fa fa-user"></i>
-                </span>
-                <input class="input-group-field" type="text" name="name" id="name" placeholder="Identifiant">
+            <h4 id="titleLogin">Se connecter</h4>
+            <div class="input-field">
+                <i class="small material-icons prefix">account_circle</i>
+                <input class="input-group-field" type="text" name="name" id="name" placeholder="Identifiant" maxlenght="255" require>
             </div>
-            <p class="text-danger"><?= isset($formError['name']) ? $formError['name'] : '' ?></p>
-            <div class="input-group">
-                <span class="input-group-label">
-                    <i class="fa fa-key"></i>
-                </span>
-                <input class="input-group-field" name="password" id="password" type="password" placeholder="Mot de passe">
+            <?php  if (isset($formError['name'])) { ?>
+            <p class="text-danger center-align">
+                <?= $formError['name'] ?>
+            </p>
+            <?php } ?>
+            <div class="input-field">
+                <i class="small material-icons prefix">lock</i>
+                <input class="input-group-field" name="password" id="password" type="password" placeholder="Mot de passe" maxlenght="255" require>
             </div>
-            <p class="text-danger"><?= isset($formError['password']) ? $formError['password'] : '' ?></p>
-            <button class="button expanded" name="submitLoginForm" id="submitLoginForm">Connexion</button>
+            <?php  if (isset($formError['password'])) { ?>
+            <p class="text-danger center-align">
+                <?= $formError['password'] ?>
+            </p>
+            <?php } ?>
+            <button class="btn waves-effect waves-light" type="submit" name="submitLoginForm" id="submitLoginForm">Connexion
+                <i class="material-icons right">send</i>
+            </button>
         </div>
     </form>
     <button class="close-button" data-close aria-label="Close modal" type="button">

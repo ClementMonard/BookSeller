@@ -9,3 +9,6 @@ define('ACCOUNT', 'exopdo');
 define('PASSWORD', 'exo');
 
 include_once 'class/database.php';
+include_once 'models/users.php';
+include_once 'models/books.php';
+include_once 'models/typeofbooks.php';

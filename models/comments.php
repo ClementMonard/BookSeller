@@ -6,4 +6,10 @@ class comments extends database {
     public $date;
     public $message;
     public $idComments;
+
+    
+    public function __construct(){
+        parent::__construct();
+        $this->dbConnection();
+    }
 }

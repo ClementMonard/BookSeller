@@ -20,6 +20,7 @@ form .form-icons {
     width: 1rem;
   }
   
-  h4 {
+  #titleLogin {
     font-family: 'Open Sans', sans-serif;
+    margin-top: 20px;
   } 

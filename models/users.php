@@ -1,7 +1,5 @@
 <?php
 
-include 'configuration.php';
-
 class users extends database {
 
     public $id = 0;

@@ -1,5 +1,17 @@
 body {
     background-color: #EFEFEF;
+  }
+
+.footer {
+    background-color: #222D3C;
+}
+
+.page-footer {
+    background-color: #222D3C;
 }
   
+.bookscover {
+    width: 150px;
+    height: 200px;
+}
   

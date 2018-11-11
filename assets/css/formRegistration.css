@@ -31,5 +31,14 @@ form .form-icons {
 
   .text-danger {
     color:red;
+    padding-bottom: 30px;
+  }
+
+  .text-success {
+    color: green;
+    font-weight: 20px;
   }
   
+  #titleLogin {
+    margin-top: 20px;
+  }

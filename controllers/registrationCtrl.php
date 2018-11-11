@@ -3,6 +3,8 @@
 include 'regex.php';
 
 $formError = [];
+$message = '';
+
 if (isset($_POST['submitForm'])) {
     if (!empty($_POST['name'])) {
         $name = htmlspecialchars($_POST['name']);
@@ -39,4 +41,5 @@ if (count($formError) == 0 && isset($_POST['submitForm'])) {
     $user->mail = $mail;
     $user->password = $password;
     $user->addUserToDatabase();
+    $message = 'Inscription réussie.';
 }

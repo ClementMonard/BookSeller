@@ -1,11 +1,10 @@
 <html>
 <?php
-require 'header3.php';
-require 'models/typeofbooks.php';
+require 'header.php';
 require 'controllers/typeofbooksCtrl.php';
-require 'scriptnavbar.php';
 ?>
-<?php foreach ($nameList as $name) { ?>
-    <p><?= $name->name; ?></p>
+<?php foreach ($nameList as $nameOfType) { ?>
+    <a href="booksdetails.php?"><?= $nameOfType->name; ?></a>
 <?php } ?>
+<?php require 'scriptnavbar.php'; ?>
 </html>
