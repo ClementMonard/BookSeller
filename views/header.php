@@ -1,9 +1,10 @@
 <?php
 session_start();
-include_once 'configuration.php';
-include_once 'controllers/headerCtrl.php';
-include_once 'formLogin.php';
-include_once 'formRegistration.php';  
+$path = $_SERVER['PHP_SELF'] != '/index.php'? '../': '';
+include_once $path.'configuration.php';
+include_once $path.'controllers/headerCtrl.php';
+include_once $path.'formLogin.php';
+include_once $path.'formRegistration.php';  
 ?>
 <head>
     <meta charset="utf-8">
@@ -23,9 +24,12 @@ include_once 'formRegistration.php';
         <?php if (!isset($_SESSION['isConnect'])) { ?>
         <li><a href="#modalLogin" class="modal-trigger">Se connecter</a></li>
         <li><a href="#modalRegistration" class="modal-trigger">S'inscrire</a></li>
-        <?php } else { ?>
+        <?php } else { ?> 
         <li><a href="oui.php">Mon compte</a></li>
         <li><a href="index.php?action=disconnect">Déconnexion</a></li>
+        <?php if($_SESSION['rank'] > 1) { ?>
+        <li><a href="views/admin.php">ADMIN</a></li>
+        <?php } ?>
         <?php } ?>
     </ul>
 </div>

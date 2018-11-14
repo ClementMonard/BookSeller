@@ -6,11 +6,11 @@ class users extends database {
     public $password = '';
     public $name = '';
     public $mail = '';
-    public $role = 1;
+    public $rank;
 
     public function __construct(){
-        parent::__construct();
-        $this->dbConnection();
+        $database = database::getInstance();
+        $this->pdo = $database->pdo;
     }
 
     /**
@@ -19,7 +19,7 @@ class users extends database {
 
     public function addUserToDatabase(){
         $query = 'INSERT INTO `DZOPD_users` (`name`, `mail`, `password`) VALUES (:name, :mail, :password)';
-        $result = $this->db->prepare($query);
+        $result = $this->pdo->prepare($query);
         $result->bindValue(':name', $this->name, PDO::PARAM_STR);
         $result->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $result->bindValue(':password', $this->password, PDO::PARAM_STR);
@@ -35,7 +35,7 @@ class users extends database {
     public function checkingIfTheUserAlreadyExists(){
         $state = false;
         $query = 'SELECT COUNT(`id`) AS `count` FROM `DZOPD_users` WHERE `name` = :name';
-        $result = $this->db->prepare($query);
+        $result = $this->pdo->prepare($query);
         $result->bindValue(':name', $this->name, PDO::PARAM_STR);
         if ($result->execute()) {
             $selectResult = $result->fetch(PDO::FETCH_OBJ);
@@ -52,13 +52,14 @@ class users extends database {
 
     public function UserConnectingToHisAccount() {
         $state = false;
-        $query = 'SELECT `id`, `name`, `password` FROM `DZOPD_users` WHERE `name` = :name';
-        $result = $this->db->prepare($query);
+        $query = 'SELECT `id`, `name`, `password`, `rank` FROM `DZOPD_users` WHERE `name` = :name';
+        $result = $this->pdo->prepare($query);
         $result->bindValue(':name', $this->name, PDO::PARAM_STR);
-        if ($result->execute()) { //On vérifie que la requête s'est bien exécutée
+        if ($result->execute()) { //Checking out if the request is well executed
             $selectResult = $result->fetch(PDO::FETCH_OBJ);
-            if (is_object($selectResult)) { //On vérifie que l'on a bien trouvé un utilisateur
-                // On hydrate
+            if (is_object($selectResult)) { //Checking out if we found a user
+                //Hydration
+                $this->rank = $selectResult->rank;
                 $this->name = $selectResult->name;
                 $this->password = $selectResult->password;
                 $this->id = $selectResult->id;
@@ -66,5 +67,34 @@ class users extends database {
             }
         }
         return $state;
+    }
+
+    public function displayUsersDetails() {
+        $isCorrect = false;
+        $query = 'SELECT `id`, `name`, `mail`, `rank` FROM `DZOPD_users` WHERE `id` = :id';
+        $getDetails = $this->pdo->prepare($query);
+        $getDetails->bindValue(':id', $this->id, PDO::PARAM_INT);
+        if ($getDetails->execute()) {
+            $resultDetails = $getDetails->fetch(PDO::FETCH_OBJ);
+            if (is_object($resultDetails)) {
+                $this->id = $resultDetails->id;
+                $this->name = $resultDetails->name;
+                $this->mail = $resultDetails->mail;
+                $this->rank = $resultDetails->rank;
+                $isCorrect = true;
+            }
+        }
+        return $isCorrect;
+    }
+
+    public function getUsersList() {
+        //Récupération des données en déterminant la requête souhaitée
+        $query = 'SELECT `id`, `name`, `mail`, `rank` FROM `DZOPD_users`';
+        $userResult = $this->pdo->query($query);
+        if (is_object($userResult)) {
+            return $patientList = $userResult->fetchAll(PDO::FETCH_OBJ);
+        } else {
+            return array();
+        }
     }
 }

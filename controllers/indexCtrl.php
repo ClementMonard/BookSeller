@@ -2,4 +2,4 @@
 
 $books = new books();
 
-$detailsList = $books->displayAllDetailsOfBooks();
+$detailsList = $books->detailsBooks();

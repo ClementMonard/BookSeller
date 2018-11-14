@@ -14,4 +14,12 @@ body {
     width: 150px;
     height: 200px;
 }
+
+.bookscards {
+    margin: auto;
+}
+
+.card-title {
+    color: lightgray;
+}
   

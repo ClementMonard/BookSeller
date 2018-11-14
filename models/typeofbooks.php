@@ -3,7 +3,7 @@
 class typeofbooks extends database {
 
     public $id;
-    public $name;
+    public $type;
 
     public function __construct(){
         parent::__construct();
@@ -11,7 +11,7 @@ class typeofbooks extends database {
     }
 
     public function getNameOfLiteraryGenres(){
-        $query = 'SELECT `name` FROM `DZOPD_typeofbooks`';
+        $query = 'SELECT `type` FROM `DZOPD_typeofbooks`';
         $nameResult = $this->db->prepare($query);
         if ($nameResult->execute()){
         if (is_object($nameResult)) {

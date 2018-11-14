@@ -9,7 +9,7 @@ class author extends database {
 
 
     public function __construct(){
-        parent::__construct();
-        $this->dbConnection();
+        $database = database::getInstance();
+        $this->pdo = $database->pdo;
     }
 }

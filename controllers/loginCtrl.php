@@ -31,6 +31,7 @@ if(count($formError) == 0){
             $message = 'Connexion effectuée.';
             //On rempli la session avec les attributs de l'objet issus de l'hydratation
             $_SESSION['name'] = $user->name;
+            $_SESSION['rank'] = $user->rank;
             $_SESSION['id'] = $user->id;
             $_SESSION['isConnect'] = true;
         }else{
