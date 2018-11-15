@@ -9,3 +9,11 @@ if (isset($_GET['id'])) {
     $displayDetailsOfUsers = $users->displayUsersDetails();
 }
 
+$typeofbooks = new typeofbooks();
+
+$listTypeOfBooks = $typeofbooks->getNameOfLiteraryGenres();
+
+$literarymovement = new literarymovement();
+
+$listingOfLiteraryMovement = $literarymovement->listOfAllLiteraryMovements();
+

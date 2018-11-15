@@ -21,7 +21,7 @@ include_once '../controllers/adminCtrl.php';
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo">BookSeller Espace Admin</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Ajoutez un livre</a></li>
+                    <li><a href="add-books.php">Ajoutez un livre</a></li>
                 </ul>
             </div>
         </nav>
@@ -45,7 +45,7 @@ include_once '../controllers/adminCtrl.php';
                     <td><?= $displayUsers->mail ?></td>
                     <td><?= $displayUsers->rank ?></td>
                     <td><a href="details-user.php?id=<?= $displayUsers->id ?>">Détails</a></td>
-                    <td><input type="submit" name="deletingButton" value="SUPPRIMER" /></td>
+                    <td><input type="submit" name="deletingButton" value="Supprimer" /></td>
                 </tr>
                 <?php } ?>
             <?php } ?>

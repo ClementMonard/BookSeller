@@ -6,13 +6,13 @@ class typeofbooks extends database {
     public $type;
 
     public function __construct(){
-        parent::__construct();
-        $this->dbConnection();
+        $database = database::getInstance();
+        $this->pdo = $database->pdo;
     }
 
     public function getNameOfLiteraryGenres(){
-        $query = 'SELECT `type` FROM `DZOPD_typeofbooks`';
-        $nameResult = $this->db->prepare($query);
+        $query = 'SELECT `id`,`type` FROM `DZOPD_typeofbooks`';
+        $nameResult = $this->pdo->prepare($query);
         if ($nameResult->execute()){
         if (is_object($nameResult)) {
             return $nameList = $nameResult->fetchAll(PDO::FETCH_OBJ);

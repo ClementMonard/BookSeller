@@ -24,7 +24,7 @@ include_once '../controllers/adminCtrl.php';
                 <div class="nav-wrapper">
                     <a href="#" class="brand-logo">BookSeller Espace Admin</a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <li><a href="sass.html">Ajoutez un livre</a></li>
+                        <li><a href="add-books.php">Ajoutez un livre</a></li>
                         <li><a href="list-of-users.php">Voir les utilisateurs</a></li>
                     </ul>
                 </div>

@@ -38,6 +38,7 @@ class books extends database {
       .  '`ath`.`dateOfBirth`,'
       .  '`ath`.`dateOfDeath`,'
       .  '`tob`.`type`,'
+      .  'IF(`lm`.`Literarymovement` = NULL, `lm`.`Literarymovement`, \'Aucun mouvement littéraire\') AS `Literary Movement`,'
       .  'COUNT(`com`.`message`) AS `countMessage`,'
       .  'COUNT(`not`.`notation`) AS `countNotation`'
    . 'FROM
@@ -54,9 +55,14 @@ class books extends database {
         `DZOPD_comments` AS `com` ON `com`.`id_DZOPD_books` = `bk`.`id`'
       .      'LEFT JOIN
         `DZOPD_notation` AS `not` ON `not`.`id_DZOPD_books` = `bk`.`id`'
-  .  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`'
+      .      'LEFT JOIN
+        `DZOPD_literarymovementsbooks` AS `lmb` ON `lmb`.`id_DZOPD_books` = `bk`.`id`'
+      .      'LEFT JOIN
+        `DZOPD_Literary_movement` AS `lm` ON `lm`.`id` = `lmb`.`id_DZOPD_Literary_movement`'
+  .  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`'
   .  'ORDER BY `bk`.`id`';
         $books = $this->pdo->prepare($query);
+        //Rajouter le bindvalue de l'id
         if($books->execute()){
             if (is_object($books)) {
                 $result = $books->fetchAll(PDO::FETCH_OBJ);

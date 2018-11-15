@@ -22,4 +22,8 @@ body {
 .card-title {
     color: lightgray;
 }
+
+.titleDetails {
+    font-weight: bold;
+}
   
