@@ -13,9 +13,7 @@
                 <input class="input-field" type="text" name="name" id="name" placeholder="Identifiant" data-lenght="25" />
             </div>
             <?php
-            if (isset($formError['name'])) { ?> 
-                <p class="text-danger center-align"><?= $formError['name'] ?></p>
-            <?php } ?>            
+            if (isset($formError['name'])) { ?><p class="text-danger center-align"><?= $formError['name'] ?></p> <?php } ?>            
             <div class="input-field">
                 <i class="small material-icons prefix">mail</i>
                 <input class="input-field" type="email" name="mail" id="mail" placeholder="Email" />

@@ -26,4 +26,8 @@ body {
 .titleDetails {
     font-weight: bold;
 }
+
+.text-danger {
+    color: red;
+}
   
