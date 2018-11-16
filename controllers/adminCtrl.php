@@ -1,26 +1,24 @@
 <?php
 
 $users = new users();
-
 $listOfUsers = $users->getUsersList();
 
-if (isset($_GET['id'])) {
-    $users->id = $_GET['id'];
-    $displayDetailsOfUsers = $users->displayUsersDetails();
-}
 
 $typeofbooks = new typeofbooks();
-
 $listTypeOfBooks = $typeofbooks->getNameOfLiteraryGenres();
-
 $literarymovement = new literarymovement();
-
 $listingOfLiteraryMovement = $literarymovement->listOfAllLiteraryMovements();
-
 $formError = [];
 $typeOfBooksArray = [];
 $literaryMovementArray = [];
 $message = '';
+
+if (isset($_POST['deletingButton'])) {
+    $users = new users();
+    $users->id = $_GET['id'];
+    $users->deleteUser();
+}
+
 
 if (isset($_POST['submitBook'])) {
     if (!empty($_POST['lastname'])) {
@@ -60,12 +58,20 @@ if (isset($_POST['submitBook'])) {
 
     if (!empty($_FILES['cover'])) {
         if (is_uploaded_file($_FILES['cover']['tmp_name'])) {
-            $image = $_FILES['cover'];
-            if(pathinfo($image['name'])['extension'] != 'png'){
-                $formError['cover'] = 'Extension de fichier incorrect, seul l\'extension png est autorisé.';
-            }
-        }
-    }
+            if(pathinfo($_FILES['cover']['name'])['extension'] == 'png' || 
+               pathinfo($_FILES['cover']['name'])['extension'] == 'jpg'){  
+          $img = $_FILES['cover'];
+          $start_path = $img['tmp_name'];
+          $end_path = 'assets/img/bookscover/' . $img['name'];
+          if (move_uploaded_file($start_path, $end_path)) {
+            //insertion en base du nom
+            $books = new books();
+            $books->cover = $img['name'];
+            $books->uploadFile();
+          }
+       }
+     }
+  }
 
     if (!empty($_POST['typeofbook'])){
         foreach($_POST['typeofbook'] AS $tob){
@@ -102,10 +108,37 @@ if (isset($_POST['submitBook'])) {
 
     if (!empty($_POST["resume"])) {
         $resume = htmlspecialchars($_POST['resume']);
-        if (!preg_match($regexSpecialCharacters, $resume)) {
+        if (is_numeric($resume)) {
             $formError['resume'] = 'Caractères invalides dans la saisie du nom du livre.';
         } else {
             $formError['resume'] = 'Champ obligatoire.';
+        }
+    }
+
+    if (count($formError) == 0) {
+        $typeofbook = new typeofbooks();
+        $author = new author();
+        $books = new books();
+        $literarymovement =  new literarymovement();
+        try {
+            Database::getInstance()->beginTransaction();
+
+            Database::getInstance()->commit();
+
+            echo 'Ajout d\'un livre enregistré avec succès.';
+
+        } catch(Exception $e)
+        {
+            //on annule la transation
+            Database::getInstance()->rollback();
+        
+            //on affiche un message d'erreur ainsi que les erreurs
+            echo 'Tout ne s\'est pas bien passé, voir les erreurs ci-dessous<br />';
+            echo 'Erreur : '.$e->getMessage().'<br />';
+            echo 'N° : '.$e->getCode();
+        
+            //on arrête l'exécution s'il y a du code après
+            exit();
         }
     }
 }

@@ -45,7 +45,7 @@ include_once '../controllers/adminCtrl.php';
                     <td><?= $displayUsers->mail ?></td>
                     <td><?= $displayUsers->rank ?></td>
                     <td><a href="details-user.php?id=<?= $displayUsers->id ?>">Détails</a></td>
-                    <td><input type="submit" name="deletingButton" value="Supprimer" /></td>
+                    <form method=POST action="list-of-users.php?id=<?= $displayUsers->id ?>"><td><input type="submit" name="deletingButton" value="Supprimer" /></td></form>
                 </tr>
                 <?php } ?>
             <?php } ?>

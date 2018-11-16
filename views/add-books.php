@@ -2,7 +2,6 @@
 session_start();
 include_once '../configuration.php';
 include_once '../controllers/adminCtrl.php';
-include_once '../regex.php';
 ?>
 <!DOCTYPE html>
 <html>

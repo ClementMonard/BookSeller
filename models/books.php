@@ -9,14 +9,21 @@ class books extends database {
     public $ISBN;
     public $resume;
 
-    public function __construct(){
-        $database = database::getInstance();
-        $this->pdo = $database->pdo;
+
+    public function insertBooks() {
+      $query = 'INSERT INTO `DZOPD_books` (`name`, `cover`, `date`, `ISBN`, `resume`) VALUES (:name, :cover, :date, :ISBN, :resume)';
+        $books = Database::getInstance()->prepare($query);
+        $books->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $books->bindValue(':cover', $this->cover, PDO::PARAM_STR);
+        $books->bindValue(':date', $this->date, PDO::PARAM_STR);
+        $books->bindValue(':ISBN', $this->ISBN, PDO::PARAM_STR);
+        $books->bindValue(':resume', $this->resume, PDO::PARAM_STR);
+        return $books->execute();
     }
 
     public function displayAllDetailsOfBooks(){
         $query = 'SELECT `name`, `cover`, `date`, `ISBN`, `resume` FROM `DZOPD_books`';
-        $booksResult = $this->pdo->prepare($query);
+        $booksResult = $this->pdo->query($query);
         if ($booksResult->execute()){
         if (is_object($booksResult)) {
             return $detailsList = $booksResult->fetchAll(PDO::FETCH_OBJ);
@@ -61,8 +68,8 @@ class books extends database {
         `DZOPD_Literary_movement` AS `lm` ON `lm`.`id` = `lmb`.`id_DZOPD_Literary_movement`'
   .  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`'
   .  'ORDER BY `bk`.`id`';
-        $books = $this->pdo->prepare($query);
-        //Rajouter le bindvalue de l'id
+        $books = Database::getInstance()->prepare($query);
+  //Rajouter le bindvalue de l'id
         if($books->execute()){
             if (is_object($books)) {
                 $result = $books->fetchAll(PDO::FETCH_OBJ);

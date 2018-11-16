@@ -13,7 +13,7 @@ require 'controllers/indexCtrl.php'; ?>
           <div class="col s12 m3">
             <div class="card">
                 <div class="card-image">
-                    <img src="<?= $booksDetails->cover ?>" />
+                    <img src="assets/img/bookscover/<?= $booksDetails->cover ?>" />
                     <span class="card-title"><?= $booksDetails->name ?></span>
                 </div>
                 <div class="card-content">
