@@ -16,8 +16,10 @@ include_once '../controllers/adminCtrl.php';
 </head>
 
 <body>
+<?php if(isset($_SESSION['rank'])) { ?>
+        <?php if($_SESSION['rank'] > 1) {?>
     <h1 id="titleAddBooks" class="center-align">Ajout d'un livre</h1>
-    <form action="#" method="POST">
+    <form enctype="multipart/form-data" action="#" method="POST">
         <div class="row">
             <div class="row">
                 <div class="input-field col s6">
@@ -88,7 +90,7 @@ include_once '../controllers/adminCtrl.php';
                 </div>
             </div>
             <div class="input-field col s6">
-                <select name="typeofbook">
+                <select name="typeofbooks">
                     <option value="" disabled selected>Choisir un type de livre</option>
                     <?php foreach ($listTypeOfBooks AS $displayTypeOfBooks) { ?>
                     <option value="<?= $displayTypeOfBooks->id ?>">
@@ -96,9 +98,9 @@ include_once '../controllers/adminCtrl.php';
                     </option>
                     <?php } ?>
                 </select>
-                <?php if (isset($formError['typeofbook'])) { ?>
+                <?php if (isset($formError['typeofbooks'])) { ?>
                 <p class="text-danger center-align">
-                    <?= $formError['typeofbook'] ?>
+                    <?= $formError['typeofbooks'] ?>
                 </p>
                 <?php } ?>
                 <label>Type de livre</label>
@@ -152,6 +154,8 @@ include_once '../controllers/adminCtrl.php';
             </button>
         </div>
     </form>
+    <?php } ?>
+<?php } ?>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../assets/js/script.js"></script>

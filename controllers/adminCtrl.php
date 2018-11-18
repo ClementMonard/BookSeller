@@ -23,18 +23,12 @@ if (isset($_POST['deletingButton'])) {
 if (isset($_POST['submitBook'])) {
     if (!empty($_POST['lastname'])) {
         $lastname = htmlspecialchars($_POST['lastname']);
-        if (!preg_match($regexName, $lastname)) {
-            $formError['lastname'] = 'Caractères invalides dans la saisie du nom.';
-        }
     } else {
         $formError['lastname'] = 'Erreur dans la saisie du nom de l\'auteur.';
     }
     
     if (!empty($_POST['firstname'])) {
         $firstname = htmlspecialchars($_POST['firstname']);
-        if (!preg_match($regexName, $firstname)) {
-            $formError['firstname'] = 'Caractères invalides dans la saisie du nom.';
-        }
     } else {
         $formError['firstname'] = 'Erreur dans la saisie du nom de l\'auteur.';
     }
@@ -48,37 +42,29 @@ if (isset($_POST['submitBook'])) {
     }
 
     if (!empty($_POST['name'])) {
-        $name = htmlspecialchars($_POST['name']);
-        if (!preg_match($regexName, $name)) {
-            $formError['name'] = 'Caractères invalides dans la saisie du nom du livre.';
-        } else {
-            $formError['name'] = 'Champs obligatoire.';
-        }
+        $name = htmlspecialchars($_POST['name']);  
+    } else {
+        $formError['name'] = 'Champs obligatoire.';
     }
 
     if (!empty($_FILES['cover'])) {
-        if (is_uploaded_file($_FILES['cover']['tmp_name'])) {
-            if(pathinfo($_FILES['cover']['name'])['extension'] == 'png' || 
-               pathinfo($_FILES['cover']['name'])['extension'] == 'jpg'){  
-          $img = $_FILES['cover'];
-          $start_path = $img['tmp_name'];
-          $end_path = 'assets/img/bookscover/' . $img['name'];
+        if (is_uploaded_file($_FILES['cover']['tmp_name'])) {  
+          $cover = $_FILES['cover'];
+          $start_path = $cover['tmp_name'];
+          $end_path = '../assets/img/bookscover/' . $cover['name'];
           if (move_uploaded_file($start_path, $end_path)) {
-            //insertion en base du nom
             $books = new books();
-            $books->cover = $img['name'];
-            $books->uploadFile();
+            $books->cover = $cover['name'];
           }
-       }
      }
   }
 
-    if (!empty($_POST['typeofbook'])){
-        foreach($_POST['typeofbook'] AS $tob){
-            if (!is_numeric($tob)){
-                $formError['typeofbook'] = 'Cette option n\'est pas une bonne valeur.';
+    if (!empty($_POST['typeofbooks'])){
+        foreach($_POST['typeofbooks'] AS $typeofbooks){
+            if (!is_numeric($typeofbooks)){
+                $formError['typeofbooks'] = 'Cette option n\'est pas une bonne valeur.';
             } else {
-                $typeOfBooksArray[] += $tob;
+                $typeOfBooksArray[] = $typeofbooks;
             }
         }
     }
@@ -88,7 +74,7 @@ if (isset($_POST['submitBook'])) {
             if (!is_numeric($lm)){
                 $formError['literarymovement'] = 'Cette option n\'est pas une bonne valeur.';
             } else {
-                $literaryMovementArray[] += $lm;
+                $literaryMovementArray[] = $lm;
             }
         }
     }
@@ -109,19 +95,46 @@ if (isset($_POST['submitBook'])) {
     if (!empty($_POST["resume"])) {
         $resume = htmlspecialchars($_POST['resume']);
         if (is_numeric($resume)) {
-            $formError['resume'] = 'Caractères invalides dans la saisie du nom du livre.';
+            $formError['resume'] = 'Caractères invalides dans la saisie du résumé du livre.';
         } else {
             $formError['resume'] = 'Champ obligatoire.';
         }
     }
 
     if (count($formError) == 0) {
-        $typeofbook = new typeofbooks();
-        $author = new author();
         $books = new books();
+        $books->name = $name;
+        $books->cover = $cover;
+        $books->date = $date;
+        $books->ISBN = $ISBN;
+        $books->resume = $resume;
+        $author = new author();
+        $author->lastname = $lastname;
+        $author->firstname = $firstname;
+        $author->dateOfBirth = $dateOfBirth;
+        $author->dateOfDeath = $dateOfDeath;
+        $authorBooks = new authorbooks();
+        $typeofbook = new typeofbooks();
+        $typeofbookOfBooks = new typeofbooksofbooks();
         $literarymovement =  new literarymovement();
+        $literarymovementBooks = new literarymovementbooks();
         try {
             Database::getInstance()->beginTransaction();
+
+            $books->insertBooks();
+            $booksID = $books->getLastInsertId();
+
+            foreach ($typeOfBooksArray AS $typeofbooks) {
+                $typeofbookOfBooks->type = $typeofbooks;
+                $typeofbookOfBooks->booksID = $booksID;
+                $typeofbookOfBooks->insertBooksTypeOfBooks();
+            }
+
+            foreach ($literaryMovementArray AS $lm) {
+                $literarymovementBooks->literarymovement = $lm;
+                $literarymovementBooks->booksID = $booksID;
+                $literarymovementBooks->insertLiteraryMovementsBooks();             
+            }
 
             Database::getInstance()->commit();
 

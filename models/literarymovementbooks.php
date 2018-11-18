@@ -1,6 +1,7 @@
 <?php
 
 class literarymovementbooks extends database {
+    
     public $id;
     public $id_DZOPD_books;
     public $id_DZOPD_literarymovement;
