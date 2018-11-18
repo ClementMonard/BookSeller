@@ -45,7 +45,7 @@ class books extends database {
       .  '`ath`.`dateOfBirth`,'
       .  '`ath`.`dateOfDeath`,'
       .  '`tob`.`type`,'
-      .  'IF(`lm`.`Literarymovement` = NULL, `lm`.`Literarymovement`, \'Aucun mouvement littéraire\') AS `Literary Movement`,'
+      .  '`lm`.`Literarymovement`,'
       .  'COUNT(`com`.`message`) AS `countMessage`,'
       .  'COUNT(`not`.`notation`) AS `countNotation`'
    . 'FROM

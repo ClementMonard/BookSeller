@@ -3,11 +3,10 @@
 $users = new users();
 $listOfUsers = $users->getUsersList();
 
-
-$typeofbooks = new typeofbooks();
-$listTypeOfBooks = $typeofbooks->getNameOfLiteraryGenres();
-$literarymovement = new literarymovement();
-$listingOfLiteraryMovement = $literarymovement->listOfAllLiteraryMovements();
+$typeofbooksList = new typeofbooks();
+$listTypeOfBooks = $typeofbooksList->getNameOfLiteraryGenres();
+$literarymovementList = new literarymovement();
+$listingOfLiteraryMovement = $literarymovementList->listOfAllLiteraryMovements();
 $formError = [];
 $typeOfBooksArray = [];
 $literaryMovementArray = [];
@@ -69,23 +68,20 @@ if (isset($_POST['submitBook'])) {
         }
     }
 
-    if (!empty($_POST['literarymovement'])){
-        foreach($_POST['literarymovement'] AS $lm){
-            if (!is_numeric($lm)){
-                $formError['literarymovement'] = 'Cette option n\'est pas une bonne valeur.';
+    if (!empty($_POST['literarymovements'])){
+        foreach($_POST['literarymovements'] AS $literarymovement){
+            if (!is_numeric($literarymovement)){
+                $formError['literarymovements'] = 'Cette option n\'est pas une bonne valeur.';
             } else {
-                $literaryMovementArray[] = $lm;
+                $literaryMovementArray[] = $literarymovement;
             }
         }
     }
 
     if (!empty($_POST['ISBN'])) {
         $ISBN = htmlspecialchars($_POST['ISBN']);
-        if (!is_numeric($ISBN)) {
-            $formError['ISBN'] = 'Caractères invalides dans la saisie du nom du livre.';
-        } else {
+     } else {
             $formError['ISBN'] = 'Champs obligatoire.';
-        }
     }
 
     if (!empty($_POST['date'])) {
@@ -94,17 +90,14 @@ if (isset($_POST['submitBook'])) {
 
     if (!empty($_POST["resume"])) {
         $resume = htmlspecialchars($_POST['resume']);
-        if (is_numeric($resume)) {
-            $formError['resume'] = 'Caractères invalides dans la saisie du résumé du livre.';
-        } else {
+     } else {
             $formError['resume'] = 'Champ obligatoire.';
-        }
     }
 
     if (count($formError) == 0) {
         $books = new books();
         $books->name = $name;
-        $books->cover = $cover;
+        $books->cover = $cover['name'];
         $books->date = $date;
         $books->ISBN = $ISBN;
         $books->resume = $resume;
@@ -113,14 +106,15 @@ if (isset($_POST['submitBook'])) {
         $author->firstname = $firstname;
         $author->dateOfBirth = $dateOfBirth;
         $author->dateOfDeath = $dateOfDeath;
-        $authorBooks = new authorbooks();
         $typeofbook = new typeofbooks();
-        $typeofbookOfBooks = new typeofbooksofbooks();
+        $typeofbook->type = $typeofbooks;
         $literarymovement =  new literarymovement();
+        $literarymovement->Literarymovement = $literarymovement;
+        $authorBooks = new authorbooks();
+        $typeofbookOfBooks = new typeofbooksofbooks();
         $literarymovementBooks = new literarymovementbooks();
         try {
             Database::getInstance()->beginTransaction();
-
             $books->insertBooks();
             $booksID = $books->getLastInsertId();
 
@@ -130,11 +124,17 @@ if (isset($_POST['submitBook'])) {
                 $typeofbookOfBooks->insertBooksTypeOfBooks();
             }
 
-            foreach ($literaryMovementArray AS $lm) {
-                $literarymovementBooks->literarymovement = $lm;
+            foreach ($literaryMovementArray AS $literarymovement) {
+                $literarymovementBooks->Literarymovement = $literarymovement;
                 $literarymovementBooks->booksID = $booksID;
-                $literarymovementBooks->insertLiteraryMovementsBooks();             
+                $literarymovementBooks->insertLiteraryMovementsBooks();
             }
+
+            $author->insertAuthor();
+            $authorID = $author->getLastInsertId();
+            $authorBooks->author = $authorID;
+            $authorBooks->booksID = $booksID;
+            $authorBooks->insertAuthorBooks();
 
             Database::getInstance()->commit();
 

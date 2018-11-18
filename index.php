@@ -24,9 +24,12 @@ require 'controllers/indexCtrl.php'; ?>
                     <p><span class="titleDetails">Prénom de l'auteur : </span><?= $booksDetails->firstname ?></p>
                     <p><span class="titleDetails">Date de naissance : </span><?= $booksDetails->dateOfBirth ?></p>
                     <?php if (!is_null($booksDetails->dateOfDeath)) { ?>
-                        <p class="titleDetails">Date de décès : <?= $booksDetails->dateOfDeath ?></p>
+                        <p><span class="titleDetails">Date de décès : </span><?= $booksDetails->dateOfDeath ?></p>
                     <?php } ?>
                     <p><span class="titleDetails">Résumé du livre : </span><?= $booksDetails->resume ?></p>
+                    <?php if (!is_null($booksDetails->Literarymovement)) { ?>
+                    <p><span class="titleDetails">Courant littéraire : </span><?= $booksDetails->Literarymovement ?></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
