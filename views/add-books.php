@@ -16,14 +16,26 @@ include_once '../controllers/adminCtrl.php';
 </head>
 
 <body>
-<?php if(isset($_SESSION['rank'])) { ?>
-        <?php if($_SESSION['rank'] > 1) {?>
-    <h1 id="titleAddBooks" class="center-align">Ajout d'un livre</h1>
+    <?php if(isset($_SESSION['rank'])) { ?>
+    <?php if($_SESSION['rank'] > 1) {?>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">BookSeller Espace Admin</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="add-types-movements.php">Ajoutez des types/courants littéraire</a></li>
+                    <li><a href="list-of-users.php">Voir les utilisateurs</a></li>
+                    <li><a href="list-types-movements.php">Voir la liste des types et courants littéraire</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <h1 id="titleAddBooks" class="center-align">Ajout d'un livre, auteur, type et courant littéraire</h1>
     <form enctype="multipart/form-data" action="#" method="POST">
         <div class="row">
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="lastname" name="lastname" type="text" class="validate">
+                    <input id="lastname" name="lastname" type="text" class="validate" value="<?php if (isset($lastname)) {echo $lastname;} ?>">
                     <?php if (isset($formError['lastname'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['lastname'] ?>
@@ -32,7 +44,7 @@ include_once '../controllers/adminCtrl.php';
                     <label for="lastname">Nom de l'auteur</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="firstname" name="firstname" type="text" class="validate">
+                    <input id="firstname" name="firstname" type="text" class="validate" value="<?php if (isset($firstname)) {echo $firstname;} ?>">
                     <?php if (isset($formError['firstname'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['firstname'] ?>
@@ -47,7 +59,7 @@ include_once '../controllers/adminCtrl.php';
                     <input id="dateOfBirth" name="dateOfBirth" type="date">
                     <?php if (isset($formError['dateOfBirth'])) { ?>
                     <p class="text-danger center-align">
-                        <?= $formError['dateOgBirth'] ?>
+                        <?= $formError['dateOfBirth'] ?>
                     </p>
                     <?php } ?>
                 </div>
@@ -63,7 +75,7 @@ include_once '../controllers/adminCtrl.php';
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="name" name="name" type="text">
+                    <input id="name" name="name" type="text" value="<?php if (isset($name)) {echo $name;} ?>">
                     <?php if (isset($formError['name'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['name'] ?>
@@ -123,7 +135,7 @@ include_once '../controllers/adminCtrl.php';
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="ISBN" name="ISBN" type="text">
+                    <input id="ISBN" name="ISBN" type="text" value="<?php if (isset($ISBN)) {echo $ISBN;} ?>" />
                     <?php if (isset($formError['ISBN'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['ISBN'] ?>
@@ -142,7 +154,7 @@ include_once '../controllers/adminCtrl.php';
                 </div>
             </div>
             <div class="input-field col s12">
-                <textarea id="resume" name="resume" type="textarea" class="materialize-textarea"></textarea>
+                <textarea id="resume" name="resume" type="textarea" class="materialize-textarea"><?php if (isset($resume)) {echo $resume;} ?></textarea>
                 <?php if (isset($formError['resume'])) { ?>
                 <p class="text-danger center-align">
                     <?= $formError['resume'] ?>
@@ -155,7 +167,7 @@ include_once '../controllers/adminCtrl.php';
         </div>
     </form>
     <?php } ?>
-<?php } ?>
+    <?php } ?>
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="../assets/js/script.js"></script>

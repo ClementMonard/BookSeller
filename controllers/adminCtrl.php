@@ -113,6 +113,7 @@ if (isset($_POST['submitBook'])) {
         $authorBooks = new authorbooks();
         $typeofbookOfBooks = new typeofbooksofbooks();
         $literarymovementBooks = new literarymovementbooks();
+        
         try {
             Database::getInstance()->beginTransaction();
             $books->insertBooks();
@@ -135,7 +136,7 @@ if (isset($_POST['submitBook'])) {
             $authorBooks->author = $authorID;
             $authorBooks->booksID = $booksID;
             $authorBooks->insertAuthorBooks();
-
+            
             Database::getInstance()->commit();
 
             echo 'Ajout d\'un livre enregistré avec succès.';

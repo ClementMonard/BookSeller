@@ -14,7 +14,6 @@ include_once '../controllers/adminCtrl.php';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/materialize.min.css" /> 
     <link rel="stylesheet" href="../assets/css/style.css" /> 
-    <script src="main.js"></script>
 </head>
 <body>
     <header>
@@ -26,6 +25,8 @@ include_once '../controllers/adminCtrl.php';
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <li><a href="add-books.php">Ajoutez un livre</a></li>
                         <li><a href="list-of-users.php">Voir les utilisateurs</a></li>
+                        <li><a href="list-types-movements.php">Voir la liste des types et courants littéraire</a></li>
+                        <li><a href="add-types-movements.php">Ajoutez des types et courants littéraire</a></li>
                     </ul>
                 </div>
             </nav>

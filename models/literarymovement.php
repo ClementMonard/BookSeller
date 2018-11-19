@@ -19,7 +19,7 @@ class literarymovement extends database {
     public function insertLiteraryMovement(){
         $query = 'INSERT INTO `DZOPD_Literary_movement` (`Literarymovement`) VALUES (:Literarymovement)';
         $literarymovement = Database::getInstance()->prepare($query);
-        $literarymovement->bindValue(':literarymovements', $this->literarymovements, PDO::PARAM_STR);
+        $literarymovement->bindValue(':Literarymovement', $this->Literarymovement, PDO::PARAM_STR);
         return $literarymovement->execute();
     }
 }

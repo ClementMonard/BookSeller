@@ -22,6 +22,9 @@ include_once '../controllers/adminCtrl.php';
                 <a href="#" class="brand-logo">BookSeller Espace Admin</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="add-books.php">Ajoutez un livre</a></li>
+                    <li><a href="add-types-movements.php">Ajoutez un type/courant littéraire</a></li>
+                    <li><a href="list-types-movements.php">Voir la liste des types/courants littéraire</a></li>
+
                 </ul>
             </div>
         </nav>
