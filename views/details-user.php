@@ -23,11 +23,15 @@ include_once '../controllers/modifyUserCtrl.php';
         <?php if($_SESSION['rank'] > 1) {?>
         <nav>
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">BookSeller Espace Admin</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Ajoutez un livre</a></li>
-                    <li><a href="list-of-users.php">Voir les utilisateurs</a></li>
-                </ul>
+            <a href="admin.php">BookSeller Espace Admin</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="add-books.php">Ajoutez un livre</a></li>
+                        <li><a href="list-of-users.php">Voir les utilisateurs</a></li>
+                        <li><a href="list-types-movements.php">Voir la liste des types et courants littéraire</a></li>
+                        <li><a href="add-types-movements.php">Ajoutez des types et courants littéraire</a></li>
+                        <li><a href="list-authors.php">Ajoutez des types et courants littéraire</a></li>
+                        <li><a href="add-types-movements.php">Ajoutez des types et courants littéraire</a></li>
+                    </ul>
             </div>
         </nav>
         <div class="container">
@@ -55,7 +59,7 @@ include_once '../controllers/modifyUserCtrl.php';
             </form>
         </div>
         <?php } else { ?>
-        <p>Ce patient n'a pas été trouvé.</p>
+        <p>Cet utilisateur n'a pas été trouvé.</p>
         <?php } ?>
         <?php } ?>
         <?php } else { ?>

@@ -6,7 +6,6 @@ include_once '../controllers/details-types-movementsCtrl.php';
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,11 +21,14 @@ include_once '../controllers/details-types-movementsCtrl.php';
         <?php if($_SESSION['rank'] > 1) { ?>
         <nav>
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">BookSeller Espace Admin</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="add-books.php">Ajoutez un livre</a></li>
-                    <li><a href="add-types-movements.php">Ajoutez un type/courant littéraire</a></li>
-                </ul>
+            <a href="admin.php">BookSeller Espace Admin</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="add-books.php">Ajoutez un livre</a></li>
+                        <li><a href="list-of-users.php">Voir les utilisateurs</a></li>
+                        <li><a href="list-types-movements.php">Voir la liste des types et courants littéraire</a></li>
+                        <li><a href="add-types-movements.php">Ajoutez des types et courants littéraire</a></li>
+                        <li><a href="list-authors.php">Liste des auteurs</a></li>
+                    </ul>
             </div>
         </nav>
         <h1 class="center-align">Liste des types de livre</h1>
@@ -48,9 +50,9 @@ include_once '../controllers/details-types-movementsCtrl.php';
                     <td>
                         <?= $displayTypes->type ?>
                     </td>
-                    <td><a href="details-user.php?id=<?= $displayTypes->id ?>">Détails</a></td>
-                    <form method=POST action="list-of-users.php?id=<?= $displayTypes->id ?>">
-                        <td><input type="submit" name="deletingButton" value="Supprimer" /></td>
+                    <td><a href="details-types-movements.php?idType=<?= $displayTypes->id ?>">Détails</a></td>
+                    <form method=POST action="list-types-movements.php?idType=<?= $displayTypes->id ?>">
+                        <td><input type="submit" name="deletingButtonType" value="Supprimer" /></td>
                     </form>
                 </tr>
                 <?php } ?>
@@ -61,7 +63,7 @@ include_once '../controllers/details-types-movementsCtrl.php';
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Types de livre</th>
+                    <th>Courant littéraire</th>
                     <th>Modifier le courant littéraire</th>
                     <th>Supprimer le courant littéraire</th>
                 </tr>
@@ -75,9 +77,9 @@ include_once '../controllers/details-types-movementsCtrl.php';
                     <td>
                         <?= $displayMovements->Literarymovement ?>
                     </td>
-                    <td><a href="details-user.php?id=<?= $displayMovements->id ?>">Détails</a></td>
-                    <form method=POST action="list-of-users.php?id=<?= $displayMovements->id ?>">
-                        <td><input type="submit" name="deletingButton" value="Supprimer" /></td>
+                    <td><a href="details-types-movements.php?idLm=<?= $displayMovements->id ?>">Détails</a></td>
+                    <form method=POST action="list-types-movements.php?idLm=<?= $displayMovements->id ?>">
+                        <td><input type="submit" name="deletingButtonLm" value="Supprimer" /></td>
                     </form>
                 </tr>
                 <?php } ?>

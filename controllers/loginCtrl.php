@@ -3,14 +3,9 @@ $name = '';
 $message='';
 $formError = [];
 
-include 'regex.php';
-
 if (isset($_POST['submitLoginForm'])) {
     if (!empty($_POST['name'])) {
         $name = htmlspecialchars($_POST['name']);
-        if (!preg_match($regexName, $name)) {
-            $formError['name'] = 'Caractères invalides';
-        }
     }else {
         $formError['name'] = 'Champs obligatoire.';
     }

@@ -1,7 +1,5 @@
 <?php
 
-include 'regex.php';
-
 $formError = [];
 $message = '';
 

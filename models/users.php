@@ -31,7 +31,7 @@ class users extends Database {
     public function checkingIfTheUserAlreadyExists(){
         $state = false;
         $query = 'SELECT COUNT(`id`) AS `count` FROM `DZOPD_users` WHERE `name` = :name';
-        $result = Database::getInstance()->query($query);
+        $result = Database::getInstance()->prepare($query);
         $result->bindValue(':name', $this->name, PDO::PARAM_STR);
         if ($result->execute()) {
             $selectResult = $result->fetch(PDO::FETCH_OBJ);

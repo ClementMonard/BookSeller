@@ -23,6 +23,30 @@ class typeofbooks extends database {
         return $type->execute();
     }
 
+    public function modifyTypeOfBook() {
+        $query = 'UPDATE `DZOPD_typeofbooks` SET `id` = :id, `type` = :type WHERE `id` = :id';
+        $userModification = Database::getInstance()->prepare($query);
+        $userModification->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $userModification->bindValue(':type', $this->type, PDO::PARAM_STR);
+        return $userModification->execute();
+    }
+
+    public function displayTypesDetails() {
+        $isCorrect = false;
+        $query = 'SELECT `id`, `type` FROM `DZOPD_typeofbooks` WHERE `id` = :id';
+        $getDetails = Database::getInstance()->prepare($query);
+        $getDetails->bindValue(':id', $this->id, PDO::PARAM_INT);
+        if ($getDetails->execute()) {
+            $resultDetails = $getDetails->fetch(PDO::FETCH_OBJ);
+            if (is_object($resultDetails)) {
+                $this->id = $resultDetails->id;
+                $this->type = $resultDetails->type;
+                $isCorrect = true;
+            }
+        }
+        return $isCorrect;
+    }
+
 }
 
 

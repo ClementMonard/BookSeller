@@ -21,12 +21,14 @@ include_once '../controllers/adminCtrl.php';
     <header>
         <nav>
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">BookSeller Espace Admin</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="add-types-movements.php">Ajoutez des types/courants littéraire</a></li>
-                    <li><a href="list-of-users.php">Voir les utilisateurs</a></li>
-                    <li><a href="list-types-movements.php">Voir la liste des types et courants littéraire</a></li>
-                </ul>
+            <a href="admin.php">BookSeller Espace Admin</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="add-books.php">Ajoutez un livre</a></li>
+                        <li><a href="list-of-users.php">Voir les utilisateurs</a></li>
+                        <li><a href="list-types-movements.php">Voir la liste des types et courants littéraire</a></li>
+                        <li><a href="add-types-movements.php">Ajoutez des types et courants littéraire</a></li>
+                        <li><a href="list-authors.php">Liste des auteurs</a></li>
+                    </ul>
             </div>
         </nav>
     </header>
@@ -55,22 +57,22 @@ include_once '../controllers/adminCtrl.php';
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <p>Date de naissance</p>
-                    <input id="dateOfBirth" name="dateOfBirth" type="date">
+                    <input id="dateOfBirth" name="dateOfBirth" type="text">
                     <?php if (isset($formError['dateOfBirth'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['dateOfBirth'] ?>
                     </p>
                     <?php } ?>
+                    <label for="dateOfBirth">Date de naissance de l'auteur</label>
                 </div>
                 <div class="input-field col s6">
-                    <p>Date de décès</p>
-                    <input id="dateOfDeath" name="dateOfDeath" type="date">
+                    <input id="dateOfDeath" name="dateOfDeath" type="text">
                     <?php if (isset($formError['dateOfDeath'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['dateOfDeath'] ?>
                     </p>
                     <?php } ?>
+                    <label for="dateOfDeath">Date de décès de l'auteur</label>
                 </div>
             </div>
             <div class="row">
@@ -93,7 +95,6 @@ include_once '../controllers/adminCtrl.php';
                                 <?= $formError['cover'] ?>
                             </p>
                             <?php } ?>
-
                         </div>
                         <div class="file-path-wrapper">
                             <input class="file-path validate" type="text">

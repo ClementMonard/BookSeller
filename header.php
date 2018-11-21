@@ -1,10 +1,9 @@
 <?php
 session_start();
-$path = $_SERVER['PHP_SELF'] != '/index.php'? '../': '';
-include_once $path.'configuration.php';
-include_once $path.'controllers/headerCtrl.php';
-include_once $path.'formLogin.php';
-include_once $path.'formRegistration.php';  
+include_once 'configuration.php';
+include_once 'controllers/headerCtrl.php';
+include_once 'formLogin.php';
+include_once 'formRegistration.php';  
 ?>
 <head>
     <meta charset="utf-8">

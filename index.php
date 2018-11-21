@@ -6,7 +6,7 @@ require 'controllers/indexCtrl.php'; ?>
 
 <body>
     <header>
-        <?php require 'views/header.php'; ?>
+        <?php require 'header.php'; ?>
     </header>
     <?php foreach ($detailsList as $booksDetails) { ?>
         <div class="row bookscards">

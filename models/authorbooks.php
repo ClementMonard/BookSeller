@@ -1,6 +1,7 @@
 <?php
 
 class authorbooks extends database {
+
     public $id;
     public $id_DZOPD_books;
     public $id_DZOPD_author;
@@ -11,5 +12,12 @@ class authorbooks extends database {
         $authorBooks->bindValue(':id_DZOPD_books', $this->booksID, PDO::PARAM_INT);
         $authorBooks->bindValue(':id_DZOPD_author', $this->author, PDO::PARAM_INT);
         return $authorBooks->execute();
+    }
+
+    public function deleteForeignKeyAuthor(){
+        $query = 'DELETE FROM `DZOPD_authorbooks` WHERE `id_DZOPD_author` = :id_DZOPD_author';
+        $deleteAuthorFK = Database::getInstance()->prepare($query);
+        $deleteAuthorFK->bindValue(':id_DZOPD_author', $this->id_DZOPD_author, PDO::PARAM_INT);
+        return $deleteAuthorFK->execute();
     }
 }

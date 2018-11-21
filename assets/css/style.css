@@ -30,4 +30,15 @@ body {
 .text-danger {
     color: red;
 }
-  
+
+.bookscovertob {
+    width : 200px;
+    height: 300px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.typeswithbooks {
+    margin-top: 100px;
+}
