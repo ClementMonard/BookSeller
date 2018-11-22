@@ -146,7 +146,7 @@ include_once '../controllers/adminCtrl.php';
                 </div>
                 <div class="input-field col s6">
                     <p>Date de parution</p>
-                    <input id="date" name="date" type="date" />
+                    <input id="date" name="date" type="text" />
                     <?php if (isset($formError['date'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['date'] ?>

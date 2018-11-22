@@ -20,4 +20,3 @@ $books->idType = 9;
 $booksBiography = $books->detailsBooksByType();
 $books->idType = 11;
 $booksRomanScienceFiction = $books->detailsBooksByType();
-

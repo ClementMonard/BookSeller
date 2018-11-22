@@ -4,7 +4,6 @@ include_once 'controllers/typeofbooksCtrl.php';
 ?>
 <!DOCTYPE html>
 <html>
-
 <body>
     <header>
         <?php include_once 'header.php'; ?>
@@ -14,7 +13,7 @@ include_once 'controllers/typeofbooksCtrl.php';
         <?php foreach ($booksPsycho as $displayAllPsychosBooks) { ?>
         <div class="col m4 s6">
             <div class="row">
-                <a href="#"><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPsychosBooks->cover ?>" /></a>
+                <a href="bookdetails.php?id=<?= $displayAllPsychosBooks->bookID ?>"><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPsychosBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPsychosBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPsychosBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPsychosBooks->cover ?>" /></a>
@@ -26,7 +25,7 @@ include_once 'controllers/typeofbooksCtrl.php';
         <?php foreach ($booksBusiness as $displayAllBusinessBooks) { ?>
         <div class="col m4 s6">
             <div class="row">
-                <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBusinessBooks->cover ?>" /></a>
+                <a href="bookdetails.php?id=<?= $displayAllBusinessBooks->bookID ?>"><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBusinessBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBusinessBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBusinessBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBusinessBooks->cover ?>" /></a>
@@ -38,7 +37,7 @@ include_once 'controllers/typeofbooksCtrl.php';
         <?php foreach ($booksBiography as $displayAllBiographyBooks) { ?>
         <div class="col m4 s6">
             <div class="row">
-                <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBiographyBooks->cover ?>" /></a>
+                <a href="bookdetails.php?id=<?= $displayAllBiographyBooks->bookID ?>"><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBiographyBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBiographyBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBiographyBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBiographyBooks->cover ?>" /></a>
@@ -50,7 +49,7 @@ include_once 'controllers/typeofbooksCtrl.php';
         <?php foreach ($booksPersonalDevelopment as $displayAllPersonalDevelopmentBooks) { ?>
         <div class="col m4 s6">
             <div class="row">
-                <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPersonalDevelopmentBooks->cover ?>" /></a>
+                <a href="bookdetails.php?id=<?= $displayAllPersonalDevelopmentBooks->bookID ?>"><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPersonalDevelopmentBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPersonalDevelopmentBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPersonalDevelopmentBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPersonalDevelopmentBooks->cover ?>" /></a>
@@ -62,7 +61,7 @@ include_once 'controllers/typeofbooksCtrl.php';
         <?php foreach ($booksRomanScienceFiction as $displayAllScienceFictionBooks) { ?>
         <div class="col m12 s6">
             <div class="row">
-                <a href=""><img class="bookscovertob m2" src="assets/img/bookscover/<?= $displayAllScienceFictionBooks->cover ?>" /></a>
+                <a href="bookdetails.php?id=<?= $displayAllScienceFictionBooks->bookID ?>"><img class="bookscovertob m2" src="assets/img/bookscover/<?= $displayAllScienceFictionBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob m2" src="assets/img/bookscover/<?= $displayAllScienceFictionBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob m2" src="assets/img/bookscover/<?= $displayAllScienceFictionBooks->cover ?>" /></a>
                 <a href=""><img class="bookscovertob m2" src="assets/img/bookscover/<?= $displayAllScienceFictionBooks->cover ?>" /></a>

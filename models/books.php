@@ -42,6 +42,7 @@ class books extends database {
 
     public function detailsBooksByType(){
         $query = ' SELECT'
+      .  '`bk`.`id` AS `bookID`,'  
       .  '`bk`.`name`,'
       .  '`bk`.`cover`,'
       .  '`bk`.`date`,'
@@ -89,6 +90,7 @@ class books extends database {
 
     public function detailsBooks(){
       $query = ' SELECT'
+    .  '`bk`.`id` AS `bookID`,'  
     .  '`bk`.`name`,'
     .  '`bk`.`cover`,'
     .  '`bk`.`date`,'
@@ -131,4 +133,54 @@ class books extends database {
       }
 return $result;
   }
+
+   public function detailsBooksById(){
+    $query = ' SELECT'
+  .  '`bk`.`id` AS `bookID`,'  
+  .  '`bk`.`name`,'
+  .  '`bk`.`cover`,'
+  .  '`bk`.`date`,'
+  .  '`bk`.`ISBN`,'
+  .  '`bk`.`resume`,'
+  .  '`ath`.`lastname`,'
+  .  '`ath`.`firstname`,'
+  .  '`ath`.`dateOfBirth`,'
+  .  '`ath`.`dateOfDeath`,'
+  .  '`tob`.`type`,'
+  .  '`tob`.`id`,'
+  .  '`lm`.`Literarymovement`,'
+  .  'COUNT(`com`.`message`) AS `countMessage`,'
+  .  'COUNT(`not`.`notation`) AS `countNotation`'
+. 'FROM
+    `DZOPD_books` AS `bk`' 
+  .      'LEFT JOIN
+    `DZOPD_authorbooks` AS `athbk` ON `athbk`.`id_DZOPD_books` = `bk`.`id`'
+  .      'LEFT JOIN
+    `DZOPD_author` AS `ath` ON `ath`.`id` = `athbk`.`id_DZOPD_author`'
+  .      'LEFT JOIN
+    `DZOPD_typeofbooksOfBooks` AS `tobob` ON `tobob`.`id_DZOPD_books` = `bk`.`id`'
+  .      'LEFT JOIN
+    `DZOPD_typeofbooks` AS `tob` ON `tob`.`id` = `tobob`.`id_DZOPD_typeofbooks`'
+  .      'LEFT JOIN
+    `DZOPD_comments` AS `com` ON `com`.`id_DZOPD_books` = `bk`.`id`'
+  .      'LEFT JOIN
+    `DZOPD_notation` AS `not` ON `not`.`id_DZOPD_books` = `bk`.`id`'
+  .      'LEFT JOIN
+    `DZOPD_literarymovementsbooks` AS `lmb` ON `lmb`.`id_DZOPD_books` = `bk`.`id`'
+  .      'LEFT JOIN
+    `DZOPD_Literary_movement` AS `lm` ON `lm`.`id` = `lmb`.`id_DZOPD_Literary_movement`'
+    .     'WHERE `bk`.`id` = :id '
+.  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`, `tob`.`id`'
+.  'ORDER BY `bk`.`id`';
+    $books = Database::getInstance()->prepare($query);
+    $books->bindValue(':id', $this->id, PDO::PARAM_INT);
+    if($books->execute()){
+        if (is_object($books)) {
+            $result = $books->fetchAll(PDO::FETCH_OBJ);
+        }
+    }
+return $result;
+}
+
+
 }
