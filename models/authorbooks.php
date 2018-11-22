@@ -20,4 +20,17 @@ class authorbooks extends database {
         $deleteAuthorFK->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $deleteAuthorFK->execute();
     }
+
+    public function checkingIfTheAuthorAlreadyExists(){
+        $state = false;
+        $query = 'SELECT COUNT(`id`) AS `count` FROM `DZOPD_authorbooks` WHERE `id_DZOPD_author` = :id_DZOPD_author';
+        $result = Database::getInstance()->prepare($query);
+        $result->bindValue(':id_DZOPD_author', $this->id_DZOPD_author, PDO::PARAM_INT);
+        if ($result->execute()) {
+            $selectResult = $result->fetch(PDO::FETCH_OBJ);
+            $state = $selectResult->count;
+        }
+        return $state;
+    }
+
 }

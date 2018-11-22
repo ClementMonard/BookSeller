@@ -13,4 +13,11 @@ class literarymovementbooks extends database {
         $authorBooks->bindValue(':id_DZOPD_books', $this->booksID, PDO::PARAM_INT);
         return $authorBooks->execute();
     }
+
+    public function deleteRowIntermediateLiteraryMovementBook(){
+        $query = 'DELETE FROM `DZOPD_literarymovementsbooks` WHERE `id` = :id';
+        $deleteLMFK = Database::getInstance()->prepare($query);
+        $deleteLMFK->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $deleteLMFK->execute();
+    }
 }

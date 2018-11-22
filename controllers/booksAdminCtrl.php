@@ -1,5 +1,20 @@
 <?php
 
+$typeofbooks = new typeofbooks();
+$nameList = $typeofbooks->getNameOfLiteraryGenres();
+
+$books = new books();
+$books->idType = 1;
+$booksPsycho = $books->detailsBooksByType();
+$books->idType = 2;
+$booksBusiness = $books->detailsBooksByType();
+$books->idType = 10;
+$booksPersonalDevelopment = $books->detailsBooksByType();
+$books->idType = 9;
+$booksBiography = $books->detailsBooksByType();
+$books->idType = 11;
+$booksRomanScienceFiction = $books->detailsBooksByType();
+
 $formErrorBook = [];
 
 if (isset($_POST['modifyButton'])) {
@@ -73,20 +88,73 @@ if (isset($_POST['modifyButton'])) {
 if (isset($_GET['id'])) {
     $books = new books();
     $books->id = $_GET['id'];
-    $displayDetailsOfBooks = $books->detailsBooksById();
+    $displayDetailsOfBooks = $books->detailsForABook();
 }
 
-$typeofbooks = new typeofbooks();
-$nameList = $typeofbooks->getNameOfLiteraryGenres();
+if (isset($_POST['deleteBookButton'])) {
+    /* Début de la transaction au clic sur le bouton supprimer */
+try {
 
-$books = new books();
-$books->idType = 1;
-$booksPsycho = $books->detailsBooksByType();
-$books->idType = 2;
-$booksBusiness = $books->detailsBooksByType();
-$books->idType = 10;
-$booksPersonalDevelopment = $books->detailsBooksByType();
-$books->idType = 9;
-$booksBiography = $books->detailsBooksByType();
-$books->idType = 11;
-$booksRomanScienceFiction = $books->detailsBooksByType();
+    Database::getInstance()->beginTransaction();
+
+    /* Instantiation de la table literarymovementbooks */
+    $literaryMovementBook = new literarymovementbooks();
+    /* Instantiation de la table typeofbookofbooks */
+    $typeOfBooksOfBooks = new typeofbooksofbooks();
+    /* Instantiation de la table authorbooks */
+    $authorbook = new authorbooks();
+    /* Instantiation de la table author */
+    $author = new author();
+    /* Instantiation de la table books */
+    $book = new books();
+    /* Définition de l'id GET dans l'id de la classe book */   
+    $book->id = $_GET['id'];
+    /* Définition de l'id de l'auteur précédemment récupéré en tant qu'alias grâce à la méthode detailsForABook() dans l'id de la 
+    /* classe author et dans la clé étrangère author de la table intermédiaire authorbook
+    */ 
+    $author->id = $authorbook->id_DZOPD_author = $displayDetailsOfBooks->authorID;
+
+    /* Définition de l'id de la table intermédiaire authorbook précédemment récupéré en tant qu'alias grâce à la méthode detailsForABook() dans l'id de la 
+    /* classe authorbook
+    */
+    $authorbook->id = $displayDetailsOfBooks->idAuthorBook;
+    /* Définition de l'id de la table intermédiaire literarymovementbooks précédemment récupéré en tant qu'alias grâce à la méthode detailsForABook() dans l'id de la 
+    /* classe literarymovementbooks
+    */
+    $literaryMovementBook->id = $displayDetailsOfBooks->idLMB;
+    /* Définition de l'id de la table intermédiaire typeofbookofbooks précédemment récupéré en tant qu'alias grâce à la méthode detailsForABook() dans l'id de la 
+    /* classe typeofbookofbooks
+    */
+    $typeOfBooksOfBooks->id = $displayDetailsOfBooks->idToBoB;
+    /* Stockage du résultat de la méthode checkingIfTheAuthorAlreadyExists() dans la variable qui permet de compter combien de fois l'id de l'auteur apparaît  */
+    $result = $authorbook->checkingIfTheAuthorAlreadyExists();
+    /* Suppression de la ligne correspondante dans la table intermédiaire authorbook à l'id du livre en question  */
+    $authorbook->deleteRowIntermediateTableAuthorBook();
+    /* Si la comptabilisation de l'id de l'auteur est inférieur à 2, il sera supprimé */
+    if ($result < 2) {
+       $author->deleteMainAuthor(); 
+    }
+    /* Suppression de la ligne correspondante dans la table intermédiare literarymovementofbooks à l'id du livre en question */
+    $literaryMovementBook->deleteRowIntermediateLiteraryMovementBook();
+    /* Suppression de la ligne correspondante dans la table intermédiare typeofbookofbooks à l'id du livre en question */
+    $typeOfBooksOfBooks->deleteRowIntermediateTableTypeOfBooksOfBooks();
+    /* Suppression du livre si toutes les précédentes méthodes se sont correctement executées  */
+    $book->deleteMainBook();
+
+    Database::getInstance()->commit();
+
+
+} catch(Exception $e)
+{
+    //on annule la transation
+    Database::getInstance()->rollback();
+
+    //on affiche un message d'erreur ainsi que les erreurs
+    echo 'Tout ne s\'est pas bien passé, voir les erreurs ci-dessous<br />';
+    echo 'Erreur : '.$e->getMessage().'<br />';
+    echo 'N° : '.$e->getCode();
+
+    //on arrête l'exécution s'il y a du code après
+    exit();
+}
+}

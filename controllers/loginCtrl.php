@@ -28,6 +28,7 @@ if(count($formError) == 0){
             $_SESSION['name'] = $user->name;
             $_SESSION['rank'] = $user->rank;
             $_SESSION['id'] = $user->id;
+            $_SESSION['mail'] = $user->mail;
             $_SESSION['isConnect'] = true;
         }else{
             //la connexion échoue

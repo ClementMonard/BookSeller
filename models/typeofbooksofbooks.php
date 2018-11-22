@@ -13,4 +13,11 @@ class typeofbooksofbooks extends database {
         $typeOfBooksOfBooks->bindValue(':id_DZOPD_books', $this->booksID, PDO::PARAM_INT);
         return $typeOfBooksOfBooks->execute();
     }
+
+    public function deleteRowIntermediateTableTypeOfBooksOfBooks(){
+        $query = 'DELETE FROM `DZOPD_typeofbooksOfBooks` WHERE `id` = :id';
+        $deleteTOBFK = Database::getInstance()->prepare($query);
+        $deleteTOBFK->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $deleteTOBFK->execute();
+    }
 }

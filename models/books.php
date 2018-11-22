@@ -59,6 +59,7 @@ class books extends database {
       .  '`bk`.`date`,'
       .  '`bk`.`ISBN`,'
       .  '`bk`.`resume`,'
+      .  '`ath`.`id` AS `authorID`,'
       .  '`ath`.`lastname`,'
       .  '`ath`.`firstname`,'
       .  '`ath`.`dateOfBirth`,'
@@ -87,7 +88,7 @@ class books extends database {
       .      'LEFT JOIN
         `DZOPD_Literary_movement` AS `lm` ON `lm`.`id` = `lmb`.`id_DZOPD_Literary_movement`'
         .     'WHERE `tob`.`id` = :idType '
-  .  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`, `tob`.`id`'
+  .  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`, `tob`.`id`, `ath`.`id`'
   .  'ORDER BY `bk`.`id`';
         $books = Database::getInstance()->prepare($query);
         $books->bindValue(':idType', $this->idType, PDO::PARAM_INT);
@@ -107,6 +108,7 @@ class books extends database {
     .  '`bk`.`date`,'
     .  '`bk`.`ISBN`,'
     .  '`bk`.`resume`,'
+    .  '`ath`.`id` AS `authorID`,'
     .  '`ath`.`lastname`,'
     .  '`ath`.`firstname`,'
     .  '`ath`.`dateOfBirth`,'
@@ -134,7 +136,7 @@ class books extends database {
       `DZOPD_literarymovementsbooks` AS `lmb` ON `lmb`.`id_DZOPD_books` = `bk`.`id`'
     .      'LEFT JOIN
       `DZOPD_Literary_movement` AS `lm` ON `lm`.`id` = `lmb`.`id_DZOPD_Literary_movement`'
-.  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`, `tob`.`id`'
+.  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`, `tob`.`id`, `ath`.`id`'
 .  'ORDER BY `bk`.`id`';
       $books = Database::getInstance()->prepare($query);
       if($books->execute()){
@@ -153,6 +155,7 @@ return $result;
   .  '`bk`.`date`,'
   .  '`bk`.`ISBN`,'
   .  '`bk`.`resume`,'
+  .  '`ath`.`id` AS `authorID`,'
   .  '`ath`.`lastname`,'
   .  '`ath`.`firstname`,'
   .  '`ath`.`dateOfBirth`,'
@@ -181,7 +184,7 @@ return $result;
   .      'LEFT JOIN
     `DZOPD_Literary_movement` AS `lm` ON `lm`.`id` = `lmb`.`id_DZOPD_Literary_movement`'
     .     'WHERE `bk`.`id` = :id '
-.  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`, `tob`.`id`'
+.  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`, `tob`.`id`, `ath`.`id`'
 .  'ORDER BY `bk`.`id`';
     $books = Database::getInstance()->prepare($query);
     $books->bindValue(':id', $this->id, PDO::PARAM_INT);
@@ -190,6 +193,58 @@ return $result;
             $result = $books->fetchAll(PDO::FETCH_OBJ);
         }
     }
+return $result;
+}
+
+public function detailsForABook(){
+  $query = ' SELECT'
+.  '`athbk`.`id` AS `idAuthorBook`,'
+.  '`tobob`.`id` AS `idToBoB`,'
+.  '`lmb`.`id` AS `idLMB`,'
+.  '`bk`.`id` AS `bookID`,'  
+.  '`bk`.`name`,'
+.  '`bk`.`cover`,'
+.  '`bk`.`date`,'
+.  '`bk`.`ISBN`,'
+.  '`bk`.`resume`,'
+.  '`ath`.`id` AS `authorID`,'
+.  '`ath`.`lastname`,'
+.  '`ath`.`firstname`,'
+.  '`ath`.`dateOfBirth`,'
+.  '`ath`.`dateOfDeath`,'
+.  '`tob`.`type`,'
+.  '`tob`.`id`,'
+.  '`lm`.`Literarymovement`,'
+.  'COUNT(`com`.`message`) AS `countMessage`,'
+.  'COUNT(`not`.`notation`) AS `countNotation`'
+. 'FROM
+  `DZOPD_books` AS `bk`' 
+.      'LEFT JOIN
+  `DZOPD_authorbooks` AS `athbk` ON `athbk`.`id_DZOPD_books` = `bk`.`id`'
+.      'LEFT JOIN
+  `DZOPD_author` AS `ath` ON `ath`.`id` = `athbk`.`id_DZOPD_author`'
+.      'LEFT JOIN
+  `DZOPD_typeofbooksOfBooks` AS `tobob` ON `tobob`.`id_DZOPD_books` = `bk`.`id`'
+.      'LEFT JOIN
+  `DZOPD_typeofbooks` AS `tob` ON `tob`.`id` = `tobob`.`id_DZOPD_typeofbooks`'
+.      'LEFT JOIN
+  `DZOPD_comments` AS `com` ON `com`.`id_DZOPD_books` = `bk`.`id`'
+.      'LEFT JOIN
+  `DZOPD_notation` AS `not` ON `not`.`id_DZOPD_books` = `bk`.`id`'
+.      'LEFT JOIN
+  `DZOPD_literarymovementsbooks` AS `lmb` ON `lmb`.`id_DZOPD_books` = `bk`.`id`'
+.      'LEFT JOIN
+  `DZOPD_Literary_movement` AS `lm` ON `lm`.`id` = `lmb`.`id_DZOPD_Literary_movement`'
+  .     'WHERE `bk`.`id` = :id '
+.  'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `tob`.`type`,`lm`.`Literarymovement`, `tob`.`id`, `ath`.`id`, `athbk`.`id`, `tobob`.`id`, `lmb`.`id`'
+.  'ORDER BY `bk`.`id`';
+  $books = Database::getInstance()->prepare($query);
+  $books->bindValue(':id', $this->id, PDO::PARAM_INT);
+  if($books->execute()){
+      if (is_object($books)) {
+          $result = $books->fetch(PDO::FETCH_OBJ);
+      }
+  }
 return $result;
 }
 

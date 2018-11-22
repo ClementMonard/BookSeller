@@ -34,60 +34,59 @@ include_once '../controllers/booksAdminCtrl.php';
         </nav>
         <?php if (isset($_GET['id']) && isset($displayDetailsOfBooks)) { ?>
         <div class="container">
-            <?php foreach ($displayDetailsOfBooks as $displayBooks) { ?>
-            <form action="booksdetailAdmin.php?id=<?= $displayBooks->bookID ?>" method="POST">
+            <form action="booksdetailAdmin.php?id=<?= $displayDetailsOfBooks->bookID ?>" method="POST">
                 <div class="col s12 m7">
                     <div class="card horizontal bookcard">
                         <div class="card-image">
-                            <img src="../assets/img/bookscover/<?= $displayBooks->cover ?>">
+                            <img src="../assets/img/bookscover/<?= $displayDetailsOfBooks->cover ?>">
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
                                 <label for="name">Titre de l'auteur :</label>
-                                <input type="text" name="name" id="name" value="<?php if (isset($displayBooks->name)) {echo $displayBooks->name;}?>" />
+                                <input type="text" name="name" id="name" value="<?php if (isset($displayDetailsOfBooks->name)) {echo $displayDetailsOfBooks->name;}?>" />
                                 <?php if (isset($formErrorBook['name'])) { ?>
                                 <p class="text-danger center-align">
                                     <?= $formErrorBook['name'] ?>
                                 </p>
                                 <?php } ?>
                                 <label for="date">Date de parution :</label>
-                                <input type="text" name="date" id="date" value="<?php if (isset($displayBooks->date)) {echo $displayBooks->date;}?>" />
+                                <input type="text" name="date" id="date" value="<?php if (isset($displayDetailsOfBooks->date)) {echo $displayDetailsOfBooks->date;}?>" />
                                 <?php if (isset($formErrorBook['date'])) { ?>
                                 <p class="text-danger center-align">
                                     <?= $formErrorBook['date'] ?>
                                 </p>
                                 <?php } ?>
                                 <label for="ISBN">ISBN :</label>
-                                <input type="text" name="ISBN" id="ISBN" value="<?php if (isset($displayBooks->ISBN)) {echo $displayBooks->ISBN;}?>" />
+                                <input type="text" name="ISBN" id="ISBN" value="<?php if (isset($displayDetailsOfBooks->ISBN)) {echo $displayDetailsOfBooks->ISBN;}?>" />
                                 <?php if (isset($formErrorBook['ISBN'])) { ?>
                                 <p class="text-danger center-align">
                                     <?= $formErrorBook['ISBN'] ?>
                                 </p>
                                 <?php } ?>
                                 <label for="resume">Résumé</label>
-                                <textarea name="resume" id="resume" class="materialize-textarea"><?php if (isset($displayBooks->resume)) {echo $displayBooks->resume;}?></textarea>
+                                <textarea name="resume" id="resume" class="materialize-textarea"><?php if (isset($displayDetailsOfBooks->resume)) {echo $displayDetailsOfBooks->resume;}?></textarea>
                                 <?php if (isset($formErrorBook['resume'])) { ?>
                                 <p class="text-danger center-align">
                                     <?= $formErrorBook['resume'] ?>
                                 </p>
                                 <?php } ?>
                                 <p><span class="titleDetails">Type du livre : </span>
-                                    <?= $displayBooks->type  ?>
+                                    <?= $displayDetailsOfBooks->type  ?>
                                 </p>
-                                <?php if (!is_null($displayBooks->Literarymovement)) { ?>
+                                <?php if (!is_null($displayDetailsOfBooks->Literarymovement)) { ?>
                                 <p><span class="titleDetails">Courant littéraire : </span>
-                                    <?= $displayBooks->Literarymovement  ?>
+                                    <?= $displayDetailsOfBooks->Literarymovement  ?>
                                 </p>
                                 <?php } ?>
                                 <p><span class="titleDetails">Auteur : </span>
-                                    <?= $displayBooks->firstname . ' ' . $displayBooks->lastname  ?>
+                                    <?= $displayDetailsOfBooks->firstname . ' ' . $displayDetailsOfBooks->lastname  ?>
                                 </p>
-                                <p><span class="titleDetails">Date de naissance </span>
-                                    <?= $displayBooks->dateOfBirth  ?>
+                                <p><span class="titleDetails">Date de naissance : </span>
+                                    <?= $displayDetailsOfBooks->dateOfBirth  ?>
                                 </p>
-                                <?php if (!is_null($displayBooks->dateOfDeath)) { ?>
+                                <?php if (!is_null($displayDetailsOfBooks->dateOfDeath)) { ?>
                                 <p><span class="titleDetails">Date de décès : </span>
-                                    <?= $displayBooks->dateOfDeath  ?>
+                                    <?= $displayDetailsOfBooks->dateOfDeath  ?>
                                 </p>
                                 <form>
                                     <?php } ?>
@@ -99,7 +98,6 @@ include_once '../controllers/booksAdminCtrl.php';
                         </div>
                     </div>
                 </div>
-                <?php } ?>
         </div>
         <?php } else {?>
         <p>Livre introuvable.</p>
