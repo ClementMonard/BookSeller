@@ -14,10 +14,10 @@ class authorbooks extends database {
         return $authorBooks->execute();
     }
 
-    public function deleteForeignKeyAuthor(){
-        $query = 'DELETE FROM `DZOPD_authorbooks` WHERE `id_DZOPD_author` = :id_DZOPD_author';
+    public function deleteRowIntermediateTableAuthorBook(){
+        $query = 'DELETE FROM `DZOPD_authorbooks` WHERE `id` = :id';
         $deleteAuthorFK = Database::getInstance()->prepare($query);
-        $deleteAuthorFK->bindValue(':id_DZOPD_author', $this->id_DZOPD_author, PDO::PARAM_INT);
+        $deleteAuthorFK->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $deleteAuthorFK->execute();
     }
 }

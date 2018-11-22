@@ -130,9 +130,12 @@ if (isset($_POST['submitBook'])) {
                 $literarymovementBooks->booksID = $booksID;
                 $literarymovementBooks->insertLiteraryMovementsBooks();
             }
-
-            $author->insertAuthor();
-            $authorID = $author->getLastInsertId();
+            if (!$author->checkingIfTheAuthorAlreadyExists()){
+                $author->insertAuthor();
+                $authorID = $author->getLastInsertId();
+            } else {
+                $authorID = $author->selectIdFromAuthor();
+            }
             $authorBooks->author = $authorID;
             $authorBooks->booksID = $booksID;
             $authorBooks->insertAuthorBooks();

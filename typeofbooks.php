@@ -70,8 +70,6 @@ include_once 'controllers/typeofbooksCtrl.php';
         </div>
         <?php } ?>
     </div>
-
-
     <?php require 'footer.php'; ?>
     <?php require 'scriptnavbar.php'; ?>
 </body>

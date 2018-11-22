@@ -21,7 +21,18 @@ class books extends database {
         return $books->execute();
     }
 
-    public function deleteBookBecauseOfTheSuppressionOfHisAuthor() {
+    public function modifyBooks() {
+      $query = 'UPDATE `DZOPD_books` SET `name` = :name, `date` = :date, `ISBN` = :ISBN, `resume` = :resume WHERE `id` = :id';
+      $bookModification = Database::getInstance()->prepare($query);
+      $bookModification->bindValue(':id', $this->id, PDO::PARAM_INT);
+      $bookModification->bindValue(':name', $this->name, PDO::PARAM_STR);
+      $bookModification->bindValue(':date', $this->date, PDO::PARAM_STR);
+      $bookModification->bindValue(':ISBN', $this->ISBN, PDO::PARAM_STR);
+      $bookModification->bindValue(':resume', $this->resume, PDO::PARAM_STR);
+      return $bookModification->execute();
+  }
+
+    public function deleteMainBook() {
       $query = 'DELETE FROM `DZOPD_books` WHERE `id` = :id';
       $deleteBook = Database::getInstance()->prepare($query);
       $deleteBook->bindValue(':id', $this->id, PDO::PARAM_INT);

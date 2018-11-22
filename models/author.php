@@ -38,6 +38,31 @@ class author extends database {
         return $isCorrect;
     }
 
+    public function selectIdFromAuthor(){
+        $state = 0;
+        $query = 'SELECT `id` FROM `DZOPD_author` WHERE `lastname` = :lastname AND `firstname` = :firstname';
+        $result = Database::getInstance()->prepare($query);
+        $result->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
+        $result->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
+        if ($result->execute()) {
+            $state = $result->fetch(PDO::FETCH_COLUMN);
+        }
+        return $state;
+    }
+
+    public function checkingIfTheAuthorAlreadyExists(){
+        $state = false;
+        $query = 'SELECT COUNT(`id`) AS `count` FROM `DZOPD_author` WHERE `lastname` = :lastname AND `firstname` = :firstname';
+        $result = Database::getInstance()->prepare($query);
+        $result->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
+        $result->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
+        if ($result->execute()) {
+            $selectResult = $result->fetch(PDO::FETCH_OBJ);
+            $state = $selectResult->count;
+        }
+        return $state;
+    }
+
     public function modifyAuthors() {
         $query = 'UPDATE `DZOPD_author` SET `id` = :id, `lastname` = :lastname, `firstname` = :firstname, `dateOfBirth` = :dateOfBirth, `dateOfDeath` = :dateOfDeath WHERE `id` = :id';
         $authorModification = Database::getInstance()->prepare($query);
