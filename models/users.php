@@ -12,10 +12,65 @@ class users extends Database {
      * Function that can add a registration of a new user in the database
      */
 
+    public function updateName(){
+        $state = false;
+        $query = 'UPDATE `DZOPD_users` SET `name` = :name WHERE `id` = :id';
+        $user = Database::getInstance()->prepare($query);
+        $user->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $user->bindValue(':name', $this->name, PDO::PARAM_STR);
+        if ($user->execute()) { 
+            $state = true;
+        }
+        return $state;
+    }
+
+    public function updatePassword(){
+        $state = false;
+        $query = 'UPDATE `DZOPD_users` SET `password` = :password WHERE `id` = :id';
+        $user = Database::getInstance()->prepare($query);
+        $user->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $user->bindValue(':password', $this->password, PDO::PARAM_STR);
+        if ($user->execute()) { 
+            $state = true;
+        }
+        return $state;
+    }
+
+    public function updateMail(){
+        $state = false;
+        $query = 'UPDATE `DZOPD_users` SET `mail` = :mail WHERE `id` = :id';
+        $user = Database::getInstance()->prepare($query);
+        $user->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $user->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        if ($user->execute()) { 
+            $state = true;
+        }
+        return $state;
+    }
+
+    public function userDeletingHisAccount() {
+        $query = 'DELETE FROM `DZOPD_users` WHERE `id` = :id';
+        $deleteUser = Database::getInstance()->prepare($query);
+        $deleteUser->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $deleteUser->execute();
+      }
+
+    public function getTheUserByHisID() {
+        $query = 'SELECT `DZOPD_users`.`id`, `DZOPD_users`.`name`, `DZOPD_users`.`mail`, `DZOPD_users`.`password`'
+                . 'FROM `DZOPD_users` '
+                . 'WHERE `DZOPD_users`.`id` = :id ';
+        $result = Database::getInstance()->prepare($query);
+        $result->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $result->execute();
+        if (is_object($result)) {
+            $isObjectResult = $result->fetch(PDO::FETCH_OBJ);
+        }
+        return $isObjectResult;
+    }
+
     public function addUserToDatabase(){
         $query = 'INSERT INTO `DZOPD_users` (`name`, `mail`, `password`) VALUES (:name, :mail, :password)';
         $result = Database::getInstance()->prepare($query);
-        $result->bindValue(':id', $this->id, PDO::PARAM_INT);
         $result->bindValue(':name', $this->name, PDO::PARAM_STR);
         $result->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $result->bindValue(':password', $this->password, PDO::PARAM_STR);

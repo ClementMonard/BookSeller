@@ -6,9 +6,6 @@ $message = '';
 if (isset($_POST['submitForm'])) {
     if (!empty($_POST['name'])) {
         $name = htmlspecialchars($_POST['name']);
-        if (!preg_match($regexName, $name)) {
-            $formError['name'] = 'Veuillez saisir des caractères valides.';
-        }
         if (strlen($name) > 25) {
             $formError['name'] = 'Votre pseudo ne doit pas dépasser 25 caractères.';
         }

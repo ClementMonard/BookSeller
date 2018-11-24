@@ -14,3 +14,20 @@ $(document).ready(function(){
     });
     
   });
+
+  $('#deleteAccount').click(function(e) {
+    e.preventDefault();
+    $.post (
+      '../ajax/userDelete.php',
+      {
+        deleteinput: $('#deleteInput').val()
+      },
+      function(data) {
+        if (data == 'SUCCESSFULL') {
+          location.reload();
+        } else {
+          alert('Erreur');
+        }
+      }, 'text'
+    );
+  });

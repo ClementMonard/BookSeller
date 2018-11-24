@@ -24,7 +24,7 @@ include_once 'formRegistration.php';
         <li><a href="#modalLogin" class="modal-trigger">Se connecter</a></li>
         <li><a href="#modalRegistration" class="modal-trigger">S'inscrire</a></li>
         <?php } else { ?> 
-        <li><a href="oui.php">Mon compte</a></li>
+        <li><a href="profil-user.php?id=<?= $_SESSION['id'] ?>">Mon compte</a></li>
         <li><a href="index.php?action=disconnect">Déconnexion</a></li>
         <?php if($_SESSION['rank'] > 1) { ?>
         <li><a href="views/admin.php">ADMIN</a></li>

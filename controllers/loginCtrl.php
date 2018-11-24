@@ -11,11 +11,10 @@ if (isset($_POST['submitLoginForm'])) {
     }
 
     if (!empty($_POST['password'])) {
-        $password = $_POST['password'];
+        $password = htmlspecialchars($_POST['password']);
     }else{
         $formError['password'] = 'Champs obligatoire.';
     }
-}
 
 if(count($formError) == 0){
     $user = new users();
@@ -29,10 +28,12 @@ if(count($formError) == 0){
             $_SESSION['rank'] = $user->rank;
             $_SESSION['id'] = $user->id;
             $_SESSION['mail'] = $user->mail;
+            $_SESSION['password'] = $user->password;
             $_SESSION['isConnect'] = true;
         }else{
             //la connexion échoue
             $message = 'Echec de la connexion.';
         }
     }
+}
 }

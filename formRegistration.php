@@ -43,8 +43,5 @@
         <p class="center-align text-success"><?= $message; ?></p>
         <?php } ?>
     </form>
-    <button class="close-button" data-close aria-label="Close modal">
-        <span aria-hidden="true">&times;</span>
-    </button>
 </div>
 <script src="assets/js/script.js"></script>

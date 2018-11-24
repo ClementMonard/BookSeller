@@ -113,7 +113,6 @@ try {
     /* classe author et dans la clé étrangère author de la table intermédiaire authorbook
     */ 
     $author->id = $authorbook->id_DZOPD_author = $displayDetailsOfBooks->authorID;
-
     /* Définition de l'id de la table intermédiaire authorbook précédemment récupéré en tant qu'alias grâce à la méthode detailsForABook() dans l'id de la 
     /* classe authorbook
     */
