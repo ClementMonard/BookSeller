@@ -5,9 +5,12 @@ include_once 'controllers/profil-userCtrl.php';
 
 <!DOCTYPE html>
 <html>
-<?php require 'header.php'; ?>
+<header>
+    <?php require 'header.php'; ?>
+</header>
 <?php if (isset($_SESSION['isConnect'])) { ?>
-<?php if (isset($_GET['id'])) { ?>
+<?php if (isset($_SESSION['id'])) { ?>
+    <main>
 <div class="container">
     <div class="row">
         <form method="POST" action="">
@@ -37,25 +40,23 @@ include_once 'controllers/profil-userCtrl.php';
             <input type="submit" name="modifyMail" id="modifyMail" class="btn col l4 s12 modifyButtonProfil" value="modifier votre adresse mail" />
         </form>
     </div>
-    <form method="POST" action="">
-        <a class="waves-effect waves-light btn modal-trigger red" href="#modalDELETE">SUPPRIMER MON COMPTE</a>
-        <div id="modalDELETE" class="modal">
-            <div class="modal-content">
-                <div class="input-field">
-                    <input type="text" id="deleteInput" />
-                    <label for="deleteInput">SI VOUS ÊTES SÛR DE VOULOIR SUPPRIMER VOTRE COMPTE VEUILLEZ SAISIR SUPPRIMER</label>
-                </div>
-                <a class="btn red" id="deleteAccount">SUPPRIMER MON COMPTE</a>
-                <a href="" class="modal-action modal-close btn-flat">ANNULER</a>
+    <a class="waves-effect waves-light btn modal-trigger red" href="#modalDELETE">SUPPRIMER MON COMPTE</a>
+    <div id="modalDELETE" class="modal">
+        <div class="modal-content">
+            <div class="input-field">
+                <input type="text" id="deleteInput" />
+                <label for="deleteInput">SI VOUS ÊTES SÛR DE VOULOIR SUPPRIMER VOTRE COMPTE VEUILLEZ SAISIR SUPPRIMER</label>
             </div>
+            <a class="btn red" id="deleteAccount">SUPPRIMER MON COMPTE</a>
+            <a href="" class="modal-action modal-close btn-flat">ANNULER</a>
         </div>
-    </form>
+    </div>
 </div>
 <?php } ?>
 <?php } else { ?>
 <p>Veuillez vous connecter pour avoir accès à votre profil.</p>
 <?php } ?>
-
+</main>
 <body>
     <?php require 'footer.php'; ?>
 </body>

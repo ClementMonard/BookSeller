@@ -5,7 +5,9 @@ include_once 'controllers/booksCtrl.php';
 
 <!DOCTYPE html>
 <html>
-<?php require 'header.php'; ?>
+<header>
+    <?php require 'header.php'; ?>
+</header>
 
 <body>
     <?php if (isset($_GET['id']) && isset($displayDetailsOfBooks)) { ?>
@@ -18,18 +20,33 @@ include_once 'controllers/booksCtrl.php';
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">
-                    <p><span class="titleDetails">Titre du livre : </span><?= $displayBooks->name  ?></p>
-                    <p><span class="titleDetails">Type du livre : </span><?= $displayBooks->type  ?></p>
-                    <p><span class="titleDetails">Date de parution du livre : </span><?= $displayBooks->date  ?></p>
-                    <?php if (!is_null($displayBooks->Literarymovement)) { ?>
-                    <p><span class="titleDetails">Courant littéraire : </span><?= $displayBooks->Literarymovement  ?></p>
-                    <?php } ?>
-                    <p><span class="titleDetails">Auteur : </span><?= $displayBooks->firstname . ' ' . $displayBooks->lastname  ?></p>
-                    <p><span class="titleDetails">Date de naissance </span><?= $displayBooks->dateOfBirth  ?></p>
-                    <?php if (!is_null($displayBooks->dateOfDeath)) { ?>
-                    <p><span class="titleDetails">Date de décès : </span><?= $displayBooks->dateOfDeath  ?></p>
-                    <?php } ?>
-                    <p><span class="titleDetails">Résumé du livre : </span><?= $displayBooks->resume  ?></p>
+                        <p><span class="titleDetails">Titre du livre : </span>
+                            <?= $displayBooks->name  ?>
+                        </p>
+                        <p><span class="titleDetails">Type du livre : </span>
+                            <?= $displayBooks->type  ?>
+                        </p>
+                        <p><span class="titleDetails">Date de parution du livre : </span>
+                            <?= $displayBooks->date  ?>
+                        </p>
+                        <?php if (!is_null($displayBooks->Literarymovement)) { ?>
+                        <p><span class="titleDetails">Courant littéraire : </span>
+                            <?= $displayBooks->Literarymovement  ?>
+                        </p>
+                        <?php } ?>
+                        <p><span class="titleDetails">Auteur : </span><a href="profil-author.php?idAuthor=<?= $displayBooks->authorID ?>">
+                                <?= $displayBooks->firstname . ' ' . $displayBooks->lastname  ?></a></p>
+                        <p><span class="titleDetails">Date de naissance </span>
+                            <?= $displayBooks->dateOfBirth  ?>
+                        </p>
+                        <?php if (!is_null($displayBooks->dateOfDeath)) { ?>
+                        <p><span class="titleDetails">Date de décès : </span>
+                            <?= $displayBooks->dateOfDeath  ?>
+                        </p>
+                        <?php } ?>
+                        <p><span class="titleDetails">Résumé du livre : </span>
+                            <?= $displayBooks->resume  ?>
+                        </p>
                     </div>
                     <div class="card-action">
                         <a href="#">This is a link</a>

@@ -12,6 +12,8 @@ class users extends Database {
      * Function that can add a registration of a new user in the database
      */
 
+    
+
     public function updateName(){
         $state = false;
         $query = 'UPDATE `DZOPD_users` SET `name` = :name WHERE `id` = :id';
@@ -160,9 +162,13 @@ class users extends Database {
     }
 
     public function deleteUser(){
+        $state = false;
         $query = 'DELETE FROM `DZOPD_users` WHERE `id` = :id';
         $deleteUser = Database::getInstance()->prepare($query);
         $deleteUser->bindValue(':id', $this->id, PDO::PARAM_INT);
-        return $deleteUser->execute();
+        if ($deleteUser->execute()) {
+            $state = true;
+        }
+        return $state;
     }
 }

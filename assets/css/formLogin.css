@@ -24,3 +24,8 @@ form .form-icons {
     font-family: 'Open Sans', sans-serif;
     margin-top: 20px;
   } 
+
+  #submitLoginForm {
+    margin-bottom: 25px;
+    margin-top: 25px;
+  }

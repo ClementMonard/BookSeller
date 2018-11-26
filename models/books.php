@@ -9,6 +9,17 @@ class books extends database {
     public $ISBN;
     public $resume;
 
+    public function displayBooksByDescOrder() {
+      $query = 'SELECT * FROM `DZOPD_books` ORDER BY `DZOPD_books`.`id` DESC LIMIT 10';
+      $books = Database::getInstance()->query($query);
+      if($books->execute()){
+          if (is_object($books)) {
+              $result = $books->fetchAll(PDO::FETCH_OBJ);
+          }
+      }
+      return $result;
+    }
+
 
     public function insertBooks() {
       $query = 'INSERT INTO `DZOPD_books` (`name`, `cover`, `date`, `ISBN`, `resume`) VALUES (:name, :cover, :date, :ISBN, :resume)';

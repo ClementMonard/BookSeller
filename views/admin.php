@@ -13,7 +13,9 @@ include_once '../controllers/adminCtrl.php';
     <title>Page Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../assets/css/materialize.min.css" /> 
-    <link rel="stylesheet" href="../assets/css/style.css" /> 
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script src="../assets/js/materialize.min.js"></script>
+    <script src="../assets/js/script.js"></script> 
 </head>
 <body>
     <header>
@@ -29,6 +31,15 @@ include_once '../controllers/adminCtrl.php';
                         <li><a href="list-types-movements.php">Voir la liste des types et courants littéraire</a></li>
                         <li><a href="add-types-movements.php">Ajoutez des types et courants littéraire</a></li>
                         <li><a href="list-authors.php">Liste des auteurs</a></li>
+                        <a class="dropdown-button btn" href="#" data-activates="author">Drop Me!</a>
+                        <ul id="author" class="dropdown-content">
+                            <li><a href="#!">one</a></li>
+                            <li><a href="#!">two</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#!">three</a></li>
+                            <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
+                            <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
+                        </ul>
                     </ul>
                 </div>
             </nav>
@@ -49,5 +60,4 @@ include_once '../controllers/adminCtrl.php';
     <a href="/index.php">Retour à l'accueil</a>
     <?php } ?>
 </body>
-
 </html>

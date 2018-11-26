@@ -93,7 +93,7 @@ include_once '../controllers/booksAdminCtrl.php';
                             </div>
                             <div class="card-action">
                                 <button class="btn waves-effect waves-light" type="submit" name="modifyButton" id="modifyButton">Modifier</button>
-                                <form method=POST action="#"><button class="btn waves-effect waves-light" type="submit" name="deleteBookButton" id="deleteBookButton">Supprimer le livre</button></form>
+                                <form method=POST action="#"><button class="btn red waves-effect waves-light" type="submit" name="deleteBookButton" id="deleteBookButton">Supprimer le livre</button></form>
                             </div>
                         </div>
                     </div>

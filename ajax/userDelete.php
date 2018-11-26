@@ -1,15 +1,13 @@
 <?php 
 
-include 'configuration.php';
+include '../configuration.php';
 
 $user = new users();
-$user->id = $_GET['id'];
-$user->name = $_SESSION['name'];
+$user->id = $_SESSION['id'];
 
 if (isset($_POST['deleteInput'])) {
     if ($_POST['deleteInput'] == 'SUPPRIMER') {
-        $user = new users();
-        $user->id = $_GET['id'];
+        $user->id = $_SESSION['id'];
        if ($user->deleteUser()){
            session_destroy();
            echo 'SUCCESSFULL';

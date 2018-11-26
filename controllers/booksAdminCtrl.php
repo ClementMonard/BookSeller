@@ -140,7 +140,11 @@ try {
     /* Suppression du livre si toutes les précédentes méthodes se sont correctement executées  */
     $book->deleteMainBook();
 
+
     Database::getInstance()->commit();
+
+    header('location:list-books.php');
+    exit;
 
 
 } catch(Exception $e)

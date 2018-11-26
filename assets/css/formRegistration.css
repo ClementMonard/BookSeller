@@ -42,3 +42,8 @@ form .form-icons {
   #titleLogin {
     margin-top: 20px;
   }
+
+  #submitRegistrationForm {
+    margin-bottom: 25px;
+    margin-top: 25px;
+  }

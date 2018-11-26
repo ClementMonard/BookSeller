@@ -8,6 +8,61 @@ class author extends database {
     public $dateOfBirth;
     public $dateOfDeath;
 
+
+    public function getCoverOfBookFromHisAuthor(){
+        $query = 'SELECT' 
+       . '`ath`.`id` AS `idAuthor`,'
+       . '`bk`.`id` AS `bookID`,'
+       . '`bk`.`cover`'
+   . 'FROM
+        `DZOPD_author` AS `ath`'
+        .    'LEFT JOIN
+        `DZOPD_authorbooks` AS `athbk` ON `athbk`.`id_DZOPD_author` = `ath`.`id`'
+        .    'LEFT JOIN
+        `DZOPD_books` AS `bk` ON `bk`.`id` = `athbk`.`id_DZOPD_books`'
+ .   'WHERE `ath`.`id` = :idAuthor '       
+ .   'GROUP BY `bk`.`id` , `ath`.`id` , `athbk`.`id`'
+ .   'ORDER BY `ath`.`id`';
+        $author = Database::getInstance()->prepare($query);
+        $author->bindValue(':idAuthor', $this->idAuthor, PDO::PARAM_INT);
+        if($author->execute()){
+            if (is_object($author)) {
+                $result = $author->fetchAll(PDO::FETCH_OBJ);
+            }
+        }
+        return $result;
+    }
+
+
+    public function getBookByAuthor(){
+        $query = 'SELECT' 
+       . '`ath`.`id` AS `idAuthor`,'
+       . '`ath`.`lastname`,'
+       . '`ath`.`firstname`,'
+       . '`ath`.`dateOfBirth`,'
+       . '`ath`.`dateOfDeath`,'
+       . '`bk`.`id` AS `bookID`,'
+       . '`bk`.`name`,'
+       . '`bk`.`cover`'
+   . 'FROM
+        `DZOPD_author` AS `ath`'
+        .    'LEFT JOIN
+        `DZOPD_authorbooks` AS `athbk` ON `athbk`.`id_DZOPD_author` = `ath`.`id`'
+        .    'LEFT JOIN
+        `DZOPD_books` AS `bk` ON `bk`.`id` = `athbk`.`id_DZOPD_books`'
+ .   'WHERE `ath`.`id` = :idAuthor '       
+ .   'GROUP BY `bk`.`id` , `ath`.`lastname` , `ath`.`firstname` , `ath`.`dateOfBirth` , `ath`.`dateOfDeath` , `ath`.`id` , `athbk`.`id`'
+ .   'ORDER BY `ath`.`id`';
+        $author = Database::getInstance()->prepare($query);
+        $author->bindValue(':idAuthor', $this->idAuthor, PDO::PARAM_INT);
+        if($author->execute()){
+            if (is_object($author)) {
+                $result = $author->fetch(PDO::FETCH_OBJ);
+            }
+        }
+        return $result;
+    }
+
     public function getValueOfAuthors(){
         $query = 'SELECT `id`, `lastname`, `firstname`, `dateOfBirth`, `dateOfDeath` FROM `DZOPD_author`';
         $author = Database::getInstance()->query($query);
