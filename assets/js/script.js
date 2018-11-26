@@ -24,19 +24,76 @@ $(document).ready(function(){
       closeOnSelect: false // Close upon selecting a date,
     });
 
-  $('input.autocomplete').autocomplete({
+  $('#autocomplete-input-type').autocomplete({
     data: {
       "Psychologie": null,
       "Business": null,
-      "Roman Science-fiction": 'https://placehold.it/250x250',
+      "Roman Science-fiction": null,
       "Développement Personnel": null
     },
     limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
     onAutocomplete: function(val) {
-      // Callback function when value is autcompleted.
+      $.ajax({
+        type: 'POST',
+        url: '../ajax/application.php',
+        data: {
+            inputApp: val
+        },
+        timeout: 3000,
+        dataType: 'json',
+        success: function (data) {
+          $('#displayBooks').html('');
+          $.each(data, function (id, output)
+                    {
+                       $('#displayBooks').append('<img src="assets/img/bookscover/' + output['cover'] + '"/>');
+                    });
+        }
+    });
     },
-    minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+    minLength: 1,
   });
+
+
+  $('#autocomplete-input-book').on('input', function () {
+    $.ajax({
+        type: 'POST',
+        url: '../ajax/application.php',
+        data: {
+            bookName: $(this).val()
+        },
+        timeout: 1000,
+        dataType: 'json',
+        success: function (data) {
+            let book = {};
+                for (var i = 0; i < data.length; i++) {
+                    book[data[i].name] = '../assets/img/bookscover/' + data[i].cover;
+                }
+            $('#autocomplete-input-book').autocomplete({
+                data: book, 
+                limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+                onAutocomplete: function(val) {
+                  $.ajax({
+                    type: 'POST',
+                    url: '../ajax/application.php',
+                    data: {
+                        inputAppBook: val
+                    },
+                    timeout: 3000,
+                    dataType: 'json',
+                    success: function (data) {
+                      $('#displayBooks').html('');
+                      $.each(data, function (id, output)
+                                {
+                                   $('#displayBooks').append('<img src="assets/img/bookscover/' + output['cover'] + '"/>');
+                                });
+                    }
+                });      // Callback function when value is autcompleted.
+                },
+                minLength: 1,
+            });
+        }
+    });
+});
     
   });
 

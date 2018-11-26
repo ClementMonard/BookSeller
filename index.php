@@ -25,11 +25,14 @@ require 'controllers/indexCtrl.php'; ?>
     </div>
     <div class="container" id="application">
     <div class="input-field col s12">
-          <i class="material-icons prefix">textsms</i>
-          <input type="text" id="autocomplete-input" class="autocomplete searchBarApp">
-          <label for="autocomplete-input">Veuillez saisir un type de livre pour obtenir en résultat des livres du même type</label>
-        </div>        
-        <div id="displayBooks" class="displayBooks"></div>
+          <input type="text" id="autocomplete-input-type" class="autocomplete searchBarApp">
+          <label for="autocomplete-input-type">Veuillez saisir un type de livre pour obtenir en résultat des livres du même type</label>
+        </div> 
+        <div class="input-field col s12">
+          <input type="text" id="autocomplete-input-book" class="autocomplete searchBarApp">
+          <label for="autocomplete-input-book">Veuillez saisir le nom d'un livre pour obtenir des livres du même type.</label>
+        </div> 
+        <div id="displayBooks" class="displayBooks"></div>       
     </div>
     <?php } else { ?>
         <p>Vous devez être connecté pour avoir accès à l'application.</p>

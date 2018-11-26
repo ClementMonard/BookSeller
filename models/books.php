@@ -9,6 +9,72 @@ class books extends database {
     public $ISBN;
     public $resume;
 
+    public function getNameOfBook() {
+      $query = 'SELECT `name`, `cover` FROM `DZOPD_books` WHERE `name` LIKE :name';
+      $books = Database::getInstance()->prepare($query);
+      $books->bindValue(':name','%' . $this->name . '%', PDO::PARAM_STR);
+    if($books->execute()){
+      if (is_object($books)) {
+          $result = $books->fetchAll(PDO::FETCH_OBJ);
+      }
+  }
+  return $result;
+    }
+
+
+    public function displayBookByHisName(){
+      $query = 'SELECT 
+      `bk`.`cover`
+  FROM
+      `DZOPD_books` AS `bk`
+          LEFT JOIN
+      `DZOPD_typeofbooksOfBooks` AS `tobob` ON `tobob`.`id_DZOPD_books` = `bk`.`id`
+          LEFT JOIN
+      `DZOPD_typeofbooks` AS `tob` ON `tob`.`id` = `tobob`.`id_DZOPD_typeofbooks`
+  WHERE
+      `tob`.`type` = (SELECT 
+              `tob`.`type`
+          FROM
+              `DZOPD_books` AS `bk`
+                  LEFT JOIN
+              `DZOPD_typeofbooksOfBooks` AS `tobob` ON `tobob`.`id_DZOPD_books` = `bk`.`id`
+                  LEFT JOIN
+              `DZOPD_typeofbooks` AS `tob` ON `tob`.`id` = `tobob`.`id_DZOPD_typeofbooks`
+          WHERE
+              `bk`.`name` = :book)';
+    $books = Database::getInstance()->prepare($query);
+    $books->bindValue(':book', $this->name, PDO::PARAM_STR);
+    if($books->execute()){
+      if (is_object($books)) {
+          $result = $books->fetchAll(PDO::FETCH_OBJ);
+      }
+  }
+  return $result;
+}
+
+    public function displayBooksByHisTypeApp($type){
+      $query = 'SELECT' 
+    .  '`bk`.`cover`'
+    .       'FROM 
+        `DZOPD_books` AS `bk`'
+        .  'LEFT JOIN
+      `DZOPD_typeofbooksOfBooks` AS `tobob` ON `tobob`.`id_DZOPD_books` = `bk`.`id`'
+        .  'LEFT JOIN
+      `DZOPD_typeofbooks` AS `tob` ON `tob`.`id` = `tobob`.`id_DZOPD_typeofbooks`'
+    .       'WHERE 
+      `tob`.`type` = :type ';
+    $books = Database::getInstance()->prepare($query);
+    $books->bindValue(':type', $type, PDO::PARAM_STR);
+    if($books->execute()){
+      if (is_object($books)) {
+          $result = $books->fetchAll(PDO::FETCH_OBJ);
+      }
+  }
+  return $result;
+}
+
+
+
     public function displayBooksByDescOrder() {
       $query = 'SELECT * FROM `DZOPD_books` ORDER BY `DZOPD_books`.`id` DESC LIMIT 10';
       $books = Database::getInstance()->query($query);
