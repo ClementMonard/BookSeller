@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '../configuration.php';
 include_once '../controllers/list-authorsCtrl.php';
 ?>

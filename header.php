@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once 'configuration.php';
 include_once 'controllers/headerCtrl.php';
 include_once 'formLogin.php';
@@ -17,7 +16,7 @@ include_once 'formRegistration.php';
 </head>
 <div class="navbar">
     <ul class="menu menu-hover-lines">
-        <li class="content-navbar"><a href="index.php">BookSeller</a></li>
+        <li class="content-navbar"><a href="accueil.html">BookSeller</a></li>
         <li class="content-navbar"><a href="typeofbooks.php">Genres Littéraires</a></li>
         <li><a href="../application.php">AUTEURS</a></li>
         <?php if (!isset($_SESSION['isConnect'])) { ?>

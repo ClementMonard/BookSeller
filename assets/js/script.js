@@ -5,6 +5,7 @@ $(document).ready(function(){
     $('select').material_select();
     $('#resume').val('');
     $('#resume').trigger('autoresize');
+    $('.collapsible').collapsible();
     $('.dropdown-button').dropdown({
       inDuration: 300,
       outDuration: 225,
@@ -45,7 +46,7 @@ $(document).ready(function(){
           $('#displayBooks').html('');
           $.each(data, function (id, output)
                     {
-                       $('#displayBooks').append('<img src="assets/img/bookscover/' + output['cover'] + '"/>');
+                       $('#displayBooks').append('<a href="bookdetails.php?id='+ output['id'] + '"><img class="bookscovertob" src="assets/img/bookscover/' + output['cover'] + '"/></a>');
                     });
         }
     });
@@ -84,7 +85,7 @@ $(document).ready(function(){
                       $('#displayBooks').html('');
                       $.each(data, function (id, output)
                                 {
-                                   $('#displayBooks').append('<img src="assets/img/bookscover/' + output['cover'] + '"/>');
+                                   $('#displayBooks').append('<a href="bookdetails.php?id='+ output['id'] + '"><img class="bookscovertob" src="assets/img/bookscover/' + output['cover'] + '"/></a>');
                                 });
                     }
                 });      // Callback function when value is autcompleted.

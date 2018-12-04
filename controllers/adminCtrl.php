@@ -10,6 +10,7 @@ $listingOfLiteraryMovement = $literarymovementList->listOfAllLiteraryMovements()
 $formError = [];
 $typeOfBooksArray = [];
 $literaryMovementArray = [];
+$successMessage = false;
 $message = '';
 
 if (isset($_POST['deletingButton'])) {
@@ -29,15 +30,19 @@ if (isset($_POST['submitBook'])) {
     if (!empty($_POST['firstname'])) {
         $firstname = htmlspecialchars($_POST['firstname']);
     } else {
-        $formError['firstname'] = 'Erreur dans la saisie du nom de l\'auteur.';
+        $formError['firstname'] = 'Erreur dans la saisie du prénom de l\'auteur.';
     }
 
     if (!empty($_POST['dateOfBirth'])) {
         $dateOfBirth = htmlspecialchars($_POST['dateOfBirth']);
+    }  else {
+        $formError['dateOfBirth'] = 'Champs obligatoire.';
     }
 
     if (!empty($_POST['dateOfDeath'])) {
         $dateOfDeath = htmlspecialchars($_POST['dateOfDeath']);
+    } else {
+        $formError['dateOfDeath'] = 'Champs obligatoire.';
     }
 
     if (!empty($_POST['name'])) {
@@ -86,6 +91,8 @@ if (isset($_POST['submitBook'])) {
 
     if (!empty($_POST['date'])) {
         $date = htmlspecialchars($_POST['date']);
+    } else {
+        $formError['date'] = 'Champs obligatoire.';
     }
 
     if (!empty($_POST["resume"])) {
@@ -105,7 +112,9 @@ if (isset($_POST['submitBook'])) {
         $author->lastname = $lastname;
         $author->firstname = $firstname;
         $author->dateOfBirth = $dateOfBirth;
-        $author->dateOfDeath = $dateOfDeath;
+        if (isset($dateOfDeath)) {
+            $author->dateOfDeath = $dateOfDeath;
+        }
         $typeofbook = new typeofbooks();
         $typeofbook->type = $typeofbooks;
         $literarymovement =  new literarymovement();
@@ -116,7 +125,10 @@ if (isset($_POST['submitBook'])) {
         
         try {
             Database::getInstance()->beginTransaction();
+            $check = $books->checkingIfTheBookAlreadyExists();
+            if ($check == 0) {             
             $books->insertBooks();
+            }
             $booksID = $books->getLastInsertId();
 
             foreach ($typeOfBooksArray AS $typeofbooks) {
@@ -141,6 +153,8 @@ if (isset($_POST['submitBook'])) {
             $authorBooks->insertAuthorBooks();
             
             Database::getInstance()->commit();
+
+            $successMessage = true;
 
             echo 'Ajout d\'un livre enregistré avec succès.';
 

@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '../configuration.php';
 include_once '../controllers/adminCtrl.php';
 ?>
@@ -31,7 +30,8 @@ include_once '../controllers/adminCtrl.php';
             </div>
         </nav>
     </header>
-    <h1 id="titleAddBooks" class="center-align">Ajout d'un livre, auteur, type et courant littéraire</h1>
+    <h1 id="titleAddBooks" class="center-align">Ajout d'un livre</h1>
+    <div class="container">
     <form enctype="multipart/form-data" action="#" method="POST">
         <div class="row">
             <div class="row">
@@ -56,7 +56,7 @@ include_once '../controllers/adminCtrl.php';
             </div>
             <div class="row">
                 <div class="input-field col s6">
-                    <input id="dateOfBirth" name="dateOfBirth" type="text">
+                    <input id="dateOfBirth" name="dateOfBirth" type="text" value="<?php if (isset($dateOfBirth)) {echo $dateOfBirth;} ?>">
                     <?php if (isset($formError['dateOfBirth'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['dateOfBirth'] ?>
@@ -65,7 +65,7 @@ include_once '../controllers/adminCtrl.php';
                     <label for="dateOfBirth">Date de naissance de l'auteur</label>
                 </div>
                 <div class="input-field col s6">
-                    <input id="dateOfDeath" name="dateOfDeath" type="text">
+                    <input id="dateOfDeath" name="dateOfDeath" type="text" value="<?php if (isset($dateOfDeath)) {echo $dateOfDeath;} ?>">
                     <?php if (isset($formError['dateOfDeath'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['dateOfDeath'] ?>
@@ -144,13 +144,13 @@ include_once '../controllers/adminCtrl.php';
                     <label for="ISBN">ISBN</label>
                 </div>
                 <div class="input-field col s6">
-                    <p>Date de parution</p>
-                    <input id="date" name="date" type="text" />
+                    <input id="date" name="date" type="text" value="<?php if (isset($date)) {echo $date;} ?>" />
                     <?php if (isset($formError['date'])) { ?>
                     <p class="text-danger center-align">
                         <?= $formError['date'] ?>
                     </p>
                     <?php } ?>
+                    <label for="ISBN">Date de parution</label>
                 </div>
             </div>
             <div class="input-field col s12">
@@ -162,10 +162,15 @@ include_once '../controllers/adminCtrl.php';
                 <?php } ?>
                 <label for="resume">Résumé du livre</label>
             </div>
+            <?php if (!empty($messageError)) { ?>
+            <p class="text-danger">Ce livre est déjà présent sur le site.</p>
+            <?php } ?>
             <button class="btn waves-effect waves-light col s12" type="submit" name="submitBook" id="submitBook">ENVOYEZ
             </button>
+            
         </div>
     </form>
+    </div>
     <?php } ?>
     <?php } ?>
 </body>

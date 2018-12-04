@@ -9,6 +9,19 @@ class books extends database {
     public $ISBN;
     public $resume;
 
+
+    public function checkingIfTheBookAlreadyExists(){
+      $state = false;
+      $query = 'SELECT COUNT(`id`) AS `count` FROM `DZOPD_books` WHERE `name` = :name';
+      $result = Database::getInstance()->prepare($query);
+      $result->bindValue(':name', $this->name, PDO::PARAM_STR);
+      if ($result->execute()) {
+          $selectResult = $result->fetch(PDO::FETCH_OBJ);
+          $state = $selectResult->count;
+      }
+      return $state;
+  }
+
     public function getNameOfBook() {
       $query = 'SELECT `name`, `cover` FROM `DZOPD_books` WHERE `name` LIKE :name';
       $books = Database::getInstance()->prepare($query);
@@ -19,19 +32,20 @@ class books extends database {
       }
   }
   return $result;
-    }
+}
 
 
     public function displayBookByHisName(){
       $query = 'SELECT 
-      `bk`.`cover`
+      `bk`.`cover`,
+      `bk`.`id`
   FROM
       `DZOPD_books` AS `bk`
           LEFT JOIN
       `DZOPD_typeofbooksOfBooks` AS `tobob` ON `tobob`.`id_DZOPD_books` = `bk`.`id`
           LEFT JOIN
       `DZOPD_typeofbooks` AS `tob` ON `tob`.`id` = `tobob`.`id_DZOPD_typeofbooks`
-  WHERE
+            WHERE
       `tob`.`type` = (SELECT 
               `tob`.`type`
           FROM
@@ -54,7 +68,8 @@ class books extends database {
 
     public function displayBooksByHisTypeApp($type){
       $query = 'SELECT' 
-    .  '`bk`.`cover`'
+    .  '`bk`.`cover`,'
+    .  '`bk`.`id`'
     .       'FROM 
         `DZOPD_books` AS `bk`'
         .  'LEFT JOIN

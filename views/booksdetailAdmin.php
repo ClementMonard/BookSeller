@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '../configuration.php';
 include_once '../controllers/booksAdminCtrl.php';
 ?>
@@ -42,7 +41,7 @@ include_once '../controllers/booksAdminCtrl.php';
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
-                                <label for="name">Titre de l'auteur :</label>
+                                <label for="name">Titre du livre :</label>
                                 <input type="text" name="name" id="name" value="<?php if (isset($displayDetailsOfBooks->name)) {echo $displayDetailsOfBooks->name;}?>" />
                                 <?php if (isset($formErrorBook['name'])) { ?>
                                 <p class="text-danger center-align">

@@ -14,6 +14,7 @@ $books->idType = 9;
 $booksBiography = $books->detailsBooksByType();
 $books->idType = 11;
 $booksRomanScienceFiction = $books->detailsBooksByType();
+$successMessage = false;
 
 $formErrorBook = [];
 
@@ -82,6 +83,7 @@ if (isset($_POST['modifyButton'])) {
         $modifyBook->ISBN = $ISBN;
         $modifyBook->resume = $resume;
         $modifyBook->modifyBooks();
+        $successMessage = true;
     }
 }
 
@@ -92,20 +94,14 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['deleteBookButton'])) {
-    /* Début de la transaction au clic sur le bouton supprimer */
 try {
 
     Database::getInstance()->beginTransaction();
-
-    /* Instantiation de la table literarymovementbooks */
+    /* Instantiation des tables liées à la suppression du livre */
     $literaryMovementBook = new literarymovementbooks();
-    /* Instantiation de la table typeofbookofbooks */
     $typeOfBooksOfBooks = new typeofbooksofbooks();
-    /* Instantiation de la table authorbooks */
     $authorbook = new authorbooks();
-    /* Instantiation de la table author */
     $author = new author();
-    /* Instantiation de la table books */
     $book = new books();
     /* Définition de l'id GET dans l'id de la classe book */   
     $book->id = $_GET['id'];

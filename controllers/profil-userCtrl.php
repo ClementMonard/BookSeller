@@ -8,6 +8,12 @@ $formErrorName = [];
 $formErrorPassword = [];
 $formErrorMail = [];
 
+if (isset($_GET['id'])) {
+    $book = new books();
+    $user->id_DZOPD_books = $book->id;
+    $displayFavoriteBook = $user->displayFavorite();
+}
+
 if (isset($_POST['modifyName'])) {
     if (isset($_POST['name'])) {
         $name = htmlspecialchars($_POST['name']);

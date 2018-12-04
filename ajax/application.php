@@ -9,7 +9,7 @@ $book = new books();
     echo json_encode($book->displayBooksByHisTypeApp($inputApp));
  } else if (isset($_POST['inputAppBook'])) {
     $book->name = htmlspecialchars($_POST['inputAppBook']);
-    echo json_encode ($book->displayBookByHisName());
+    echo json_encode($book->displayBookByHisName());
  } else if (isset($_POST['bookName'])) {
     $book->name = htmlspecialchars($_POST['bookName']);
     echo json_encode($book->getNameOfBook());

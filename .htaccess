@@ -1,0 +1,8 @@
+<ifModule mod_rewrite.c>
+
+RewriteEngine On
+
+RewriteRule ^accueil.html$ index.php
+RewriteRule ^types-de-livres.html$ typeofbooks.php
+
+</ifModule>

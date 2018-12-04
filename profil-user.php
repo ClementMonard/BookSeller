@@ -52,6 +52,7 @@ include_once 'controllers/profil-userCtrl.php';
         </div>
     </div>
 </div>
+<p><?= $displayFavoriteBook->name ?></p>
 <?php } ?>
 <?php } else { ?>
 <p>Veuillez vous connecter pour avoir accès à votre profil.</p>

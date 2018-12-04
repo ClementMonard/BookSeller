@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '../configuration.php';
 include_once '../controllers/booksAdminCtrl.php';
 ?>
@@ -30,47 +29,50 @@ include_once '../controllers/booksAdminCtrl.php';
                     </ul>
                 </div>
             </nav>
+            <?php if ($successMessage == true) { ?>
+            <h2 class="text-success center-alin">Le livre a bien été supprimé.</h2>
+            <?php } ?>
             <div class="container typeswithbooks">
         <h2 class="center-align">Livres Psychologie</h2>
-        <?php foreach ($booksPsycho as $displayAllPsychosBooks) { ?>
         <div class="col m4 s6">
             <div class="row">
+            <?php foreach ($booksPsycho as $displayAllPsychosBooks) { ?>
                 <a href="booksdetailAdmin.php?id=<?= $displayAllPsychosBooks->bookID ?>"><img class="bookscovertob" src="../assets/img/bookscover/<?= $displayAllPsychosBooks->cover ?>" /></a>
+                <?php } ?>
             </div>
         </div>
-        <?php } ?>
         <h2 class="center-align">Livres Business</h2>
-        <?php foreach ($booksBusiness as $displayAllBusinessBooks) { ?>
         <div class="col m4 s6">
             <div class="row">
+            <?php foreach ($booksBusiness as $displayAllBusinessBooks) { ?>
                 <a href="booksdetailAdmin.php?id=<?= $displayAllBusinessBooks->bookID ?>"><img class="bookscovertob" src="../assets/img/bookscover/<?= $displayAllBusinessBooks->cover ?>" /></a>
+            <?php } ?>
             </div>
         </div>
-        <?php } ?>
         <h2 class="center-align">Livres Biographie</h2>
-        <?php foreach ($booksBiography as $displayAllBiographyBooks) { ?>
         <div class="col m4 s6">
             <div class="row">
+            <?php foreach ($booksBiography as $displayAllBiographyBooks) { ?>
                 <a href="booksdetailAdmin.php?id=<?= $displayAllBiographyBooks->bookID ?>"><img class="bookscovertob" src="../assets/img/bookscover/<?= $displayAllBiographyBooks->cover ?>" /></a>
+            <?php } ?>
             </div>
         </div>
-        <?php } ?>
         <h2 class="center-align">Livres Développement Personnel</h2>
-        <?php foreach ($booksPersonalDevelopment as $displayAllPersonalDevelopmentBooks) { ?>
         <div class="col m4 s6">
             <div class="row">
+            <?php foreach ($booksPersonalDevelopment as $displayAllPersonalDevelopmentBooks) { ?>
                 <a href="booksdetailAdmin.php?id=<?= $displayAllPersonalDevelopmentBooks->bookID ?>"><img class="bookscovertob" src="../assets/img/bookscover/<?= $displayAllPersonalDevelopmentBooks->cover ?>" /></a>
+            <?php } ?>
             </div>
         </div>
-        <?php } ?>
         <h2 class="center-align">Romans Science-fiction</h2>
-        <?php foreach ($booksRomanScienceFiction as $displayAllScienceFictionBooks) { ?>
         <div class="col m12 s6">
             <div class="row">
+            <?php foreach ($booksRomanScienceFiction as $displayAllScienceFictionBooks) { ?>
                 <a href="booksdetailAdmin.php?id=<?= $displayAllScienceFictionBooks->bookID ?>"><img class="bookscovertob m2" src="../assets/img/bookscover/<?= $displayAllScienceFictionBooks->cover ?>" /></a>
+            <?php } ?>
             </div>
         </div>
-        <?php } ?>
     </div>
         <?php } ?>
         <?php } else { ?>

@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '../configuration.php';
 include_once '../controllers/details-types-movementsCtrl.php';
 ?>
@@ -38,7 +37,6 @@ include_once '../controllers/details-types-movementsCtrl.php';
                     <th>ID</th>
                     <th>Types de livre</th>
                     <th>Modifier le type</th>
-                    <th>Supprimer le type</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,9 +49,6 @@ include_once '../controllers/details-types-movementsCtrl.php';
                         <?= $displayTypes->type ?>
                     </td>
                     <td><a href="details-types-movements.php?idType=<?= $displayTypes->id ?>">Détails</a></td>
-                    <form method=POST action="list-types-movements.php?idType=<?= $displayTypes->id ?>">
-                        <td><input type="submit" name="deletingButtonType" value="Supprimer" /></td>
-                    </form>
                 </tr>
                 <?php } ?>
             </tbody>
@@ -65,7 +60,6 @@ include_once '../controllers/details-types-movementsCtrl.php';
                     <th>ID</th>
                     <th>Courant littéraire</th>
                     <th>Modifier le courant littéraire</th>
-                    <th>Supprimer le courant littéraire</th>
                 </tr>
             </thead>
             <tbody>
@@ -78,9 +72,6 @@ include_once '../controllers/details-types-movementsCtrl.php';
                         <?= $displayMovements->Literarymovement ?>
                     </td>
                     <td><a href="details-types-movements.php?idLm=<?= $displayMovements->id ?>">Détails</a></td>
-                    <form method=POST action="list-types-movements.php?idLm=<?= $displayMovements->id ?>">
-                        <td><input type="submit" name="deletingButtonLm" value="Supprimer" /></td>
-                    </form>
                 </tr>
                 <?php } ?>
             </tbody>

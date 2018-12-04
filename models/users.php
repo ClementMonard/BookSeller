@@ -7,12 +7,38 @@ class users extends Database {
     public $name = '';
     public $mail = '';
     public $rank;
+    public $id_DZOPD_books;
 
     /**
      * Function that can add a registration of a new user in the database
      */
 
-    
+    public function displayFavorite() {
+        $query = 'SELECT'
+      . '`id_DZOPD_books`,'
+      . '`bk`.`cover`,'
+      . '`bk`.`name`'
+      .     'FROM
+         `DZOPD_users`'
+      .   'LEFT JOIN
+        `DZOPD_books` AS `bk` ON `bk`.`id` = `DZOPD_users`.`id_DZOPD_books`'
+      .    'WHERE
+        `DZOPD_users`.`id` = :id';
+        $result = Database::getInstance()->prepare($query);
+        $result->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $result->execute();
+        if (is_object($result)) {
+            $isObjectResult = $result->fetch(PDO::FETCH_OBJ);
+        }
+        return $isObjectResult;
+    }
+
+    public function addBookToFavorite(){
+        $query = 'INSERT INTO `DZOPD_users` (`id_DZOPD_books`) VALUES (:id_DZOPD_books)';
+        $result = Database::getInstance()->prepare($query);
+        $result->bindValue(':id_DZOPD_books', $this->id_DZOPD_books, PDO::PARAM_INT);
+        return $result->execute();
+    }
 
     public function updateName(){
         $state = false;

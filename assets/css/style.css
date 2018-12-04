@@ -2,7 +2,8 @@ body {
     background-color: #EFEFEF;
     display: flex;
     min-height: 100vh;
-    flex-direction: column
+    flex-direction: column;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 
   main {
@@ -131,7 +132,7 @@ body {
   .searchBarApp {
       margin-left: 50px;
       margin-top: 20px;
-      margin-bottom: 50px;
+      margin-bottom:2bbbadff 50px;
       max-width: 30%;
       border-radius: 10px;
       border: 2px solid rgb(0, 0, 0);
@@ -148,3 +149,57 @@ body {
   #explainationText {
       margin-top: 100px;
   }
+
+#notConnectedText {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-top: 100px;
+}
+
+@import "bourbon";
+
+.comments {
+  margin-left: 15px;
+  margin: rem(40) auto 0;
+  max-width: rem(972);
+  padding: 0 rem(20);
+}
+
+.comment-wrap {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-bottom: rem(20);
+  display: table;
+  width: 100%;
+  min-height: rem(85);
+}
+
+.comment-block {
+  padding: rem(16);
+  background-color: #fff;
+  display: table-cell;
+  vertical-align: top;
+  border-radius: rem(3);
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08);
+}
+
+.comment-text {
+  hyphens: auto;
+  margin-left: 7px;
+  margin-bottom: rem(20);
+}
+
+.bottom-comment {
+  color: #acb4c2;
+  font-size: rem(14);
+}
+
+.comment-date {
+  margin-left: 7px;
+  float: left;
+}
+
+.comment-actions {
+  float: right;
+}
+
