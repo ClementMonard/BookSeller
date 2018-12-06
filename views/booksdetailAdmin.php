@@ -41,7 +41,7 @@ include_once '../controllers/booksAdminCtrl.php';
                         </div>
                         <div class="card-stacked">
                             <div class="card-content">
-                                <label for="name">Titre du livre :</label>
+                                <label for="name">Titre :</label>
                                 <input type="text" name="name" id="name" value="<?php if (isset($displayDetailsOfBooks->name)) {echo $displayDetailsOfBooks->name;}?>" />
                                 <?php if (isset($formErrorBook['name'])) { ?>
                                 <p class="text-danger center-align">
@@ -69,9 +69,11 @@ include_once '../controllers/booksAdminCtrl.php';
                                     <?= $formErrorBook['resume'] ?>
                                 </p>
                                 <?php } ?>
-                                <p><span class="titleDetails">Type du livre : </span>
+                                <?php if (!is_null($displayDetailsOfBooks->type)) { ?>
+                                <p><span class="titleDetails">Type : </span>
                                     <?= $displayDetailsOfBooks->type  ?>
                                 </p>
+                                <?php } ?>
                                 <?php if (!is_null($displayDetailsOfBooks->Literarymovement)) { ?>
                                 <p><span class="titleDetails">Courant littéraire : </span>
                                     <?= $displayDetailsOfBooks->Literarymovement  ?>

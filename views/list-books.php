@@ -81,6 +81,14 @@ include_once '../controllers/booksAdminCtrl.php';
             <?php } ?>
             </div>
         </div>
+        <h2 class="center-align">Livres L'Humanisme</h2>
+        <div class="col m12 s6">
+            <div class="row">
+            <?php foreach ($booksHumanism as $displayAllHumanismBooks) { ?>
+                <a href="booksdetailAdmin.php?id=<?= $displayAllHumanismBooks->bookID ?>"><img class="bookscovertob m2" src="../assets/img/bookscover/<?= $displayAllHumanismBooks->cover ?>" /></a>
+            <?php } ?>
+            </div>
+        </div>
     </div>
         <?php } ?>
         <?php } else { ?>

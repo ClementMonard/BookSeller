@@ -24,9 +24,11 @@ include_once 'controllers/booksCtrl.php';
                             <p class="detailsBook"><span class="titleDetails">Titre : </span>
                                 <?= $displayBooks->name  ?>
                             </p>
+                            <?php if (!is_null($displayBooks->type)) { ?>
                             <p class="detailsBook"><span class="titleDetails">Type : </span>
                                 <?= $displayBooks->type  ?>
                             </p>
+                            <?php } ?>
                             <p class="detailsBook"><span class="titleDetails">Date de parution : </span>
                                 <?= $displayBooks->date  ?>
                             </p>

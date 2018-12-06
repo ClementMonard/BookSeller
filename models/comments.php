@@ -39,4 +39,16 @@ class comments extends database {
     }
     return $result;
   }
+
+  public function deleteCommentsWhenDeletingTheUser(){
+    $state = false;
+    $query = 'DELETE FROM `DZOPD_comments` WHERE `id` = :id';
+    $deleteUser = Database::getInstance()->prepare($query);
+    $deleteUser->bindValue(':id', $this->id, PDO::PARAM_INT);
+    if ($deleteUser->execute()) {
+        $state = true;
+    }
+    return $state;
+}
+
 }

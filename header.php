@@ -18,7 +18,6 @@ include_once 'formRegistration.php';
     <ul class="menu menu-hover-lines">
         <li class="content-navbar"><a href="accueil.html">BookSeller</a></li>
         <li class="content-navbar"><a href="typeofbooks.php">Genres Littéraires</a></li>
-        <li><a href="../application.php">AUTEURS</a></li>
         <?php if (!isset($_SESSION['isConnect'])) { ?>
         <li><a href="#modalLogin" class="modal-trigger">Se connecter</a></li>
         <li><a href="#modalRegistration" class="modal-trigger">S'inscrire</a></li>

@@ -27,3 +27,7 @@ $books->idType = 12;
 $booksPolicier = $books->detailsBooksByType();
 $books->idType = 13;
 $booksBd = $books->detailsBooksByType();
+$books->idLm = 1;
+$booksHumanism = $books->detailsBooksByLiteraryMovement();
+$books->idLm = 2;
+$booksPleiade = $books->detailsBooksByLiteraryMovement();

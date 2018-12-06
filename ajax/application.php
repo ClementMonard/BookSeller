@@ -13,6 +13,9 @@ $book = new books();
  } else if (isset($_POST['bookName'])) {
     $book->name = htmlspecialchars($_POST['bookName']);
     echo json_encode($book->getNameOfBook());
+ } else if (isset($_POST['inputAppLm'])) {
+     $inputAppLm = htmlspecialchars($_POST['inputAppLm']);
+     echo json_encode($book->displayBooksByHisLmApp($inputAppLm));
  }
 
 ?>

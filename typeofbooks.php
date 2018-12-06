@@ -28,7 +28,7 @@ include_once 'controllers/typeofbooksCtrl.php';
     <?php } ?>
   </ul>
   <div class="container">
-  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i>Filtrer</a>
+  <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i>  Vous souhaitez filtrer ? Cliquez-ici</a>
   </div>
     <div class="container typeswithbooks">
         <h2 class="center-align" id="psychoBooks">Livres Psychologie</h2>
@@ -84,6 +84,22 @@ include_once 'controllers/typeofbooksCtrl.php';
             <div class="row">
                 <?php foreach ($booksBd as $displayAllBdBooks) { ?>
                 <a href="bookdetails.php?id=<?= $displayAllBdBooks->bookID ?>"><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllBdBooks->cover ?>" /></a>
+                <?php } ?>
+            </div>
+        </div>
+        <h2 class="center-align" id="bdBooks">Livres Humanismes</h2>
+        <div class="col m4 s6">
+            <div class="row">
+                <?php foreach ($booksHumanism as $displayAllHumanismBooks) { ?>
+                <a href="bookdetails.php?id=<?= $displayAllHumanismBooks->bookID ?>"><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllHumanismBooks->cover ?>" /></a>
+                <?php } ?>
+            </div>
+        </div>
+        <h2 class="center-align" id="bdBooks">Livres Pléiades</h2>
+        <div class="col m4 s6">
+            <div class="row">
+                <?php foreach ($booksPleiade as $displayAllPleiadeBooks) { ?>
+                <a href="bookdetails.php?id=<?= $displayAllPleiadeBooks->bookID ?>"><img class="bookscovertob" src="assets/img/bookscover/<?= $displayAllPleiadeBooks->cover ?>" /></a>
                 <?php } ?>
             </div>
         </div>

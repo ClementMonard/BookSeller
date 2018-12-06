@@ -16,6 +16,9 @@ $books->idType = 11;
 $booksRomanScienceFiction = $books->detailsBooksByType();
 $books->idType = 12;
 $booksPolicier = $books->detailsBooksByType();
+
+$books->idLm = 1;
+$booksHumanism = $books->detailsBooksByLiteraryMovement();
 $successMessage = false;
 
 $formErrorBook = [];

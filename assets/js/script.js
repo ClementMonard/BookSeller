@@ -79,6 +79,33 @@ $(document).ready(function(){
     minLength: 1,
   });
 
+  $('#autocomplete-input-lm').autocomplete({
+    data: {
+      "L'humanisme": null,
+      "La pléiade": null
+    },
+    limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+    onAutocomplete: function(val) {
+      $.ajax({
+        type: 'POST',
+        url: '../ajax/application.php',
+        data: {
+            inputAppLm: val
+        },
+        timeout: 3000,
+        dataType: 'json',
+        success: function (data) {
+          $('#displayBooks').html('');
+          $.each(data, function (id, output)
+                    {
+                       $('#displayBooks').append('<a href="bookdetails.php?id='+ output['id'] + '"><img class="bookscovertob" src="assets/img/bookscover/' + output['cover'] + '"/></a>');
+                    });
+        }
+    });
+    },
+    minLength: 1,
+  });
+
 
   $('#autocomplete-input-book').on('input', function () {
     $.ajax({

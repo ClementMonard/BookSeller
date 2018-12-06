@@ -1,7 +1,7 @@
 <?php
 
 $formError = [];
-$message = '';
+$successRegistration = [];
 
 if (isset($_POST['submitForm'])) {
     if (!empty($_POST['name'])) {
@@ -35,6 +35,10 @@ if (count($formError) == 0 && isset($_POST['submitForm'])) {
     $user->name = $name;
     $user->mail = $mail;
     $user->password = $password;
-    $user->addUserToDatabase();
-    $message = 'Inscription réussie.';
+    if ($user->addUserToDatabase()) {
+    $successRegistration['register'] = 'Inscription réussie ! Bienvenue';
+    header('location:index.php');
+    exit;
+     var_dump($successRegistration);
+    } 
 }

@@ -114,7 +114,9 @@ if (isset($_POST['submitBook'])) {
             $author->dateOfDeath = $dateOfDeath;
         }
         $typeofbook = new typeofbooks();
-        $typeofbook->type = $typeofbooks;
+        if (isset($typeofbooks)) {
+            $typeofbook->type = $typeofbooks;
+        }
         $literarymovement =  new literarymovement();
         $literarymovement->Literarymovement = $literarymovement;
         $authorBooks = new authorbooks();
