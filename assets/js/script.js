@@ -3,9 +3,31 @@ $(document).ready(function(){
     $('.modal').modal();
     $('.carousel').carousel();
     $('select').material_select();
+    $(".button-collapse").sideNav();
     $('#resume').val('');
     $('#resume').trigger('autoresize');
     $('.collapsible').collapsible();
+    $('#redirectionPsychologie').click(function() {
+        $('html,body').animate({scrollTop: $("#psychoBooks").offset().top}, 'slow');
+      });
+      $('#redirectionBusiness').click(function() {
+        $('html,body').animate({scrollTop: $("#businessBooks").offset().top}, 'slow');
+      }); 
+      $('#redirectionBiographie').click(function() {
+        $('html,body').animate({scrollTop: $("#biographyBooks").offset().top}, 'slow');
+      });
+      $('#redirectionDéveloppement-Personnel').click(function() {
+        $('html,body').animate({scrollTop: $("#personnalDevelopmentBooks").offset().top}, 'slow');
+      }); 
+      $('#redirectionRoman-Science-fiction').click(function() {
+        $('html,body').animate({scrollTop: $("#scienceFictionBooks").offset().top}, 'slow');
+      });
+      $('#redirectionPolicier').click(function() {
+        $('html,body').animate({scrollTop: $("#policierBooks").offset().top}, 'slow');
+      });
+      $('#redirectionBande-dessinée').click(function() {
+        $('html,body').animate({scrollTop: $("#bdBooks").offset().top}, 'slow');
+      });
     $('.dropdown-button').dropdown({
       inDuration: 300,
       outDuration: 225,
@@ -30,7 +52,10 @@ $(document).ready(function(){
       "Psychologie": null,
       "Business": null,
       "Roman Science-fiction": null,
-      "Développement Personnel": null
+      "Développement Personnel": null,
+      "Policier": null,
+      "Fantastique": null,
+      "Bande-dessinée": null
     },
     limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
     onAutocomplete: function(val) {
@@ -96,21 +121,4 @@ $(document).ready(function(){
     });
 });
     
-  });
-
-  $('#deleteAccount').click(function(e) {
-    e.preventDefault();
-    $.post (
-      '../ajax/userDelete.php',
-      {
-        deleteinput: $('#deleteInput').val()
-      },
-      function(data) {
-        if (data == 'SUCCESSFULL') {
-          location.reload();
-        } else {
-          alert('Erreur');
-        }
-      }, 'text'
-    );
   });

@@ -14,6 +14,8 @@ $books->idType = 9;
 $booksBiography = $books->detailsBooksByType();
 $books->idType = 11;
 $booksRomanScienceFiction = $books->detailsBooksByType();
+$books->idType = 12;
+$booksPolicier = $books->detailsBooksByType();
 $successMessage = false;
 
 $formErrorBook = [];

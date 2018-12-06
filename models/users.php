@@ -122,6 +122,17 @@ class users extends Database {
         }
         return $state;
     }
+    public function checkingIfTheMailAlreadyExists(){
+        $state = false;
+        $query = 'SELECT COUNT(`id`) AS `count` FROM `DZOPD_users` WHERE `mail` = :mail';
+        $result = Database::getInstance()->prepare($query);
+        $result->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        if ($result->execute()) {
+            $selectResult = $result->fetch(PDO::FETCH_OBJ);
+            $state = $selectResult->count;
+        }
+        return $state;
+    } 
 
 
     /**
@@ -131,7 +142,7 @@ class users extends Database {
 
     public function UserConnectingToHisAccount() {
         $state = false;
-        $query = 'SELECT `id`, `name`, `password`, `rank` FROM `DZOPD_users` WHERE `name` = :name';
+        $query = 'SELECT `id`, `name`, `password`, `rank`, `mail` FROM `DZOPD_users` WHERE `name` = :name';
         $result = Database::getInstance()->prepare($query);
         $result->bindValue(':name', $this->name, PDO::PARAM_STR);
         if ($result->execute()) { //Checking out if the request is well executed
@@ -140,6 +151,7 @@ class users extends Database {
                 //Hydration
                 $this->rank = $selectResult->rank;
                 $this->name = $selectResult->name;
+                $this->mail = $selectResult->mail;
                 $this->password = $selectResult->password;
                 $this->id = $selectResult->id;
                 $state = true;

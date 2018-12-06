@@ -41,8 +41,6 @@ if (isset($_POST['submitBook'])) {
 
     if (!empty($_POST['dateOfDeath'])) {
         $dateOfDeath = htmlspecialchars($_POST['dateOfDeath']);
-    } else {
-        $formError['dateOfDeath'] = 'Champs obligatoire.';
     }
 
     if (!empty($_POST['name'])) {

@@ -163,9 +163,9 @@ class books extends database {
       .  'COUNT(`not`.`notation`) AS `countNotation`'
    . 'FROM
         `DZOPD_books` AS `bk`' 
-      .      'LEFT JOIN
+      .      'INNER JOIN
         `DZOPD_authorbooks` AS `athbk` ON `athbk`.`id_DZOPD_books` = `bk`.`id`'
-      .      'LEFT JOIN
+      .      'INNER JOIN
         `DZOPD_author` AS `ath` ON `ath`.`id` = `athbk`.`id_DZOPD_author`'
       .      'LEFT JOIN
         `DZOPD_typeofbooksOfBooks` AS `tobob` ON `tobob`.`id_DZOPD_books` = `bk`.`id`'

@@ -102,7 +102,7 @@ include_once '../controllers/adminCtrl.php';
                 </div>
             </div>
             <div class="input-field col s6">
-                <select name="typeofbooks[]" id="typeofbooks">
+                <select multiple name="typeofbooks[]" id="typeofbooks">
                     <option value="" disabled selected>Choisir un type de livre</option>
                     <?php foreach ($listTypeOfBooks AS $displayTypeOfBooks) { ?>
                     <option value="<?= $displayTypeOfBooks->id ?>">
@@ -118,7 +118,7 @@ include_once '../controllers/adminCtrl.php';
                 <label>Type de livre</label>
             </div>
             <div class="input-field col s6">
-                <select name="literarymovements[]" id="literarymovements">
+                <select multiple name="literarymovements[]" id="literarymovements">
                     <option value="" disabled selected>Choisir un courant littéraire</option>
                     <?php foreach ($listingOfLiteraryMovement AS $displayLiteraryMovement) { ?>
                     <option value="<?= $displayLiteraryMovement->id ?>">

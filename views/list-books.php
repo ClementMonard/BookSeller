@@ -73,6 +73,14 @@ include_once '../controllers/booksAdminCtrl.php';
             <?php } ?>
             </div>
         </div>
+        <h2 class="center-align">Romans Policiers</h2>
+        <div class="col m12 s6">
+            <div class="row">
+            <?php foreach ($booksPolicier as $displayAllPolicierBooks) { ?>
+                <a href="booksdetailAdmin.php?id=<?= $displayAllPolicierBooks->bookID ?>"><img class="bookscovertob m2" src="../assets/img/bookscover/<?= $displayAllPolicierBooks->cover ?>" /></a>
+            <?php } ?>
+            </div>
+        </div>
     </div>
         <?php } ?>
         <?php } else { ?>

@@ -6,6 +6,9 @@ if (isset($_GET['id'])) {
     $displayDetailsOfBooks = $books->detailsBooksById();
 }
 
+$lm = new literarymovement();
+$lmList = $lm->listOfAllLiteraryMovements();
+
 $typeofbooks = new typeofbooks();
 $nameList = $typeofbooks->getNameOfLiteraryGenres();
 
@@ -20,4 +23,7 @@ $books->idType = 9;
 $booksBiography = $books->detailsBooksByType();
 $books->idType = 11;
 $booksRomanScienceFiction = $books->detailsBooksByType();
-
+$books->idType = 12;
+$booksPolicier = $books->detailsBooksByType();
+$books->idType = 13;
+$booksBd = $books->detailsBooksByType();

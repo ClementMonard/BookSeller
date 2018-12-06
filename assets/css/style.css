@@ -45,6 +45,7 @@ body {
     margin-left: 50px;
     margin-bottom: 50px;
     margin-top: 30px;
+    box-shadow: 6px 5px 5px black;
 }
 
 .typeswithbooks {
@@ -56,6 +57,16 @@ body {
     width: 100%;
     height: 10%;
 }
+
+
+.detailsBooks {
+  margin-top: 15px;
+}
+
+#resumeBook {
+  margin-top: 30px;
+}
+
 
 .menu-hover-lines {
     text-align: center;

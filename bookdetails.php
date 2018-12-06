@@ -21,13 +21,13 @@ include_once 'controllers/booksCtrl.php';
                     </div>
                     <div class="card-stacked">
                         <div class="card-content">
-                            <p class="detailsBook"><span class="titleDetails">Titre du livre : </span>
+                            <p class="detailsBook"><span class="titleDetails">Titre : </span>
                                 <?= $displayBooks->name  ?>
                             </p>
-                            <p class="detailsBook"><span class="titleDetails">Type du livre : </span>
+                            <p class="detailsBook"><span class="titleDetails">Type : </span>
                                 <?= $displayBooks->type  ?>
                             </p>
-                            <p class="detailsBook"><span class="titleDetails">Date de parution du livre : </span>
+                            <p class="detailsBook"><span class="titleDetails">Date de parution : </span>
                                 <?= $displayBooks->date  ?>
                             </p>
                             <?php if (!is_null($displayBooks->Literarymovement)) { ?>
@@ -45,7 +45,7 @@ include_once 'controllers/booksCtrl.php';
                                 <?= $displayBooks->dateOfDeath  ?>
                             </p>
                             <?php } ?>
-                            <p class="detailsBook"><span class="titleDetails">Résumé du livre : </span>
+                            <p class="detailsBook" id="resumeBook"><span class="titleDetails">Résumé du livre : </span>
                                 <?= $displayBooks->resume  ?>
                             </p>
                         </div>
