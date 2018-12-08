@@ -9,6 +9,11 @@ class author extends database {
     public $dateOfDeath;
 
 
+    /**
+     * Méthode qui permet de récupérer la couverture d'un livre lié à son auteur pour permettre l'affichage de tous les livres 
+     * de cet auteur disponible sur le site
+     */
+
     public function getCoverOfBookFromHisAuthor(){
         $query = 'SELECT' 
        . '`ath`.`id` AS `idAuthor`,'
@@ -33,6 +38,10 @@ class author extends database {
         return $result;
     }
 
+
+    /**
+     * Méthode qui permet toutes les informations liées à un auteur pour les afficher sur son profil
+     */
 
     public function getBookByAuthor(){
         $query = 'SELECT' 
@@ -63,6 +72,10 @@ class author extends database {
         return $result;
     }
 
+    /**
+     * Méthode qui permet d'afficher tous les auteurs enregistrés sur le site via la page administrateur
+     */
+
     public function getValueOfAuthors(){
         $query = 'SELECT `id`, `lastname`, `firstname`, `dateOfBirth`, `dateOfDeath` FROM `DZOPD_author`';
         $author = Database::getInstance()->query($query);
@@ -73,6 +86,11 @@ class author extends database {
         }
         return $result;
     }
+
+    /**
+     * Méthode qui permet d'afficher toutes les informations d'un auteur directement dans un formulaire pour permettre la modification
+     * de celui-ci directement via la page administrateur
+     */
 
     public function displayAuthorsDetails() {
         $isCorrect = false;
@@ -93,6 +111,11 @@ class author extends database {
         return $isCorrect;
     }
 
+    /**
+     * Méthode qui permet d'attribuer le dernier livre enregistré via le formulaire d'ajout de livre via la page administrateur
+     * à l'auteur qui est déjà présent dans la base en se basant sur son nom et prénom.
+     */
+
     public function selectIdFromAuthor(){
         $state = 0;
         $query = 'SELECT `id` FROM `DZOPD_author` WHERE `lastname` = :lastname AND `firstname` = :firstname';
@@ -104,6 +127,11 @@ class author extends database {
         }
         return $state;
     }
+
+    /**
+     * Méthode qui permettra de vérifier si l'auteur saisi dans le formulaire d'ajout de livre via la page administrateur n'est pas
+     * déjà présent dans la base de données, en se basant sur le nom et le prénom de celui-ci.
+     */
 
     public function checkingIfTheAuthorAlreadyExists(){
         $state = false;
@@ -118,6 +146,11 @@ class author extends database {
         return $state;
     }
 
+    /**
+     * Méthode qui permet la modification de l'auteur via la page administrateur, notamment pratique pour
+     *  l'ajout d'une date de décès.
+     */
+
     public function modifyAuthors() {
         $query = 'UPDATE `DZOPD_author` SET `id` = :id, `lastname` = :lastname, `firstname` = :firstname, `dateOfBirth` = :dateOfBirth, `dateOfDeath` = :dateOfDeath WHERE `id` = :id';
         $authorModification = Database::getInstance()->prepare($query);
@@ -129,6 +162,10 @@ class author extends database {
         return $authorModification->execute();
     }
 
+    /**
+     * Méthode qui permettra d'insérer un nouvel auteur si celui-ci n'est pas déjà présent dans la base de données
+     */
+
     public function insertAuthor(){
         $query = 'INSERT INTO `DZOPD_author` (`lastname`, `firstname`, `dateOfBirth`, `dateOfDeath`) VALUES (:lastname, :firstname, :dateOfBirth, :dateOfDeath)';
         $author = Database::getInstance()->prepare($query);
@@ -138,6 +175,10 @@ class author extends database {
         $author->bindValue(':dateOfDeath', $this->dateOfDeath, PDO::PARAM_STR);
         return $author->execute();
     }
+
+    /**
+     * Méthode qui permet la suppression d'un auteur
+     */
 
     public function deleteMainAuthor(){
         $query = 'DELETE FROM `DZOPD_author` WHERE `id` = :authorID';

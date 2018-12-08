@@ -1,4 +1,5 @@
 <?php
+
 $name = '';
 $message='';
 $formError = [];
@@ -16,10 +17,15 @@ if (isset($_POST['submitLoginForm'])) {
         $formError['password'] = 'Champs obligatoire.';
     }
 
+    //Si la comptabilisation du tableau d'erreur est égal à 0
 if(count($formError) == 0){
+    //Instanciation de la classe users
     $user = new users();
+    //Attribution de la valeur stockée dans $name pour l'attribuer à l'attribut name de la classe users
     $user->name = $name;
+    //Si l'utilisateur se connecte
     if($user->UserConnectingToHisAccount()){
+        //Son mot de passe est vérifié à l'aide la fonction password_verify qui vérifie que le mot de passe match avec le mot de passé hashé
         if(password_verify($password, $user->password)){
             //la connexion se fait
             $message = 'Connexion effectuée.';

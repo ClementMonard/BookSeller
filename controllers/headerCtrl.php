@@ -1,11 +1,12 @@
 <?php
 
+//Au clic sur sur le bouton contenant la superglobal $_GET['action]
 if (isset($_GET['action'])) {
-    //Si on veut se déconnecter
+    //Si action est égal à disconnect
     if ($_GET['action'] == 'disconnect') {
-        //destruction de la session
+        //destruction de la session, donc déconnexion
         session_destroy();
-        //redirection de la page vers l'index
+        //Redirection vers l'index une fois la déconnexion effectuée
         header('location:index.php');
     }
 }

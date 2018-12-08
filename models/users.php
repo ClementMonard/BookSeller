@@ -10,7 +10,7 @@ class users extends Database {
     public $id_DZOPD_books;
 
     /**
-     * Function that can add a registration of a new user in the database
+     * Méthode qui permet d'afficher le livre favoris d'un utilisateur
      */
 
     public function displayFavorite() {
@@ -33,12 +33,9 @@ class users extends Database {
         return $isObjectResult;
     }
 
-    public function addBookToFavorite(){
-        $query = 'INSERT INTO `DZOPD_users` (`id_DZOPD_books`) VALUES (:id_DZOPD_books)';
-        $result = Database::getInstance()->prepare($query);
-        $result->bindValue(':id_DZOPD_books', $this->id_DZOPD_books, PDO::PARAM_INT);
-        return $result->execute();
-    }
+    /**
+     * Méthode qui permet de à l'utilisateur de mettre à jour son pseudo
+     */
 
     public function updateName(){
         $state = false;
@@ -52,6 +49,10 @@ class users extends Database {
         return $state;
     }
 
+    /**
+     * Méthode qui permet à l'utilisateur de mettre à jour son mot de passe
+     */
+
     public function updatePassword(){
         $state = false;
         $query = 'UPDATE `DZOPD_users` SET `password` = :password WHERE `id` = :id';
@@ -63,6 +64,10 @@ class users extends Database {
         }
         return $state;
     }
+
+    /**
+     * Méthode qui permet à l'utilisateur de mettre à jour son adresse-mail
+     */
 
     public function updateMail(){
         $state = false;
@@ -76,12 +81,20 @@ class users extends Database {
         return $state;
     }
 
+    /**
+     * Méthode qui permet à l'utilisateur de supprimer son compte
+     */
+
     public function userDeletingHisAccount() {
         $query = 'DELETE FROM `DZOPD_users` WHERE `id` = :id';
         $deleteUser = Database::getInstance()->prepare($query);
         $deleteUser->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $deleteUser->execute();
       }
+
+      /**
+     * Méthode qui permet de voir le profil d'un utilisateur
+     */
 
     public function getTheUserByHisID() {
         $query = 'SELECT `DZOPD_users`.`id`, `DZOPD_users`.`name`, `DZOPD_users`.`mail`, `DZOPD_users`.`password`'
@@ -96,6 +109,10 @@ class users extends Database {
         return $isObjectResult;
     }
 
+    /**
+     * Méthode qui permet d'enregistrer en base l'incription d'un nouvel utilisateur
+     */
+
     public function addUserToDatabase(){
         $query = 'INSERT INTO `DZOPD_users` (`name`, `mail`, `password`) VALUES (:name, :mail, :password)';
         $result = Database::getInstance()->prepare($query);
@@ -107,7 +124,7 @@ class users extends Database {
     
 
     /**
-     * Function that check if a user with the same username already exists in the database.
+     * Méthode qui permet d'éviter qu'un utilisateur possède le même pseudo qu'un autre utilisateur déjà enregistré en base
      * @return boolean
      */
 
@@ -122,6 +139,12 @@ class users extends Database {
         }
         return $state;
     }
+
+    /**
+     * Méthode qui permet d'éviter qu'un utilisateur possède la même adresse-mail qu'un autre utilisateur déjà enregistré en base
+     */
+
+
     public function checkingIfTheMailAlreadyExists(){
         $state = false;
         $query = 'SELECT COUNT(`id`) AS `count` FROM `DZOPD_users` WHERE `mail` = :mail';
@@ -160,6 +183,11 @@ class users extends Database {
         return $state;
     }
 
+    /**
+     * Méthode qui d'avoir toutes les informations d'un utilisateur pour pouvoir l'afficher et permettre la modification ou suppresion de celui-ci
+     * via la page administrateur
+     */
+
     public function displayUsersDetails() {
         $isCorrect = false;
         $query = 'SELECT `id`, `name`, `mail`, `rank` FROM `DZOPD_users` WHERE `id` = :id';
@@ -178,6 +206,10 @@ class users extends Database {
         return $isCorrect;
     }
 
+    /**
+     * Méthode qui permet la modification d'un utilisateur via la page administrateur
+     */
+
     public function modifyUser() {
         $query = 'UPDATE `DZOPD_users` SET `id` = :id, `name` = :name, `mail` = :mail, `rank` = :ranking WHERE `id` = :id';
         $userModification = Database::getInstance()->prepare($query);
@@ -187,6 +219,10 @@ class users extends Database {
         $userModification->bindValue(':ranking', $this->rank, PDO::PARAM_INT);
         return $userModification->execute();
     }
+
+    /**
+     * Méthode qui permet d'afficher tous les utilisateurs enregistrés en base dans un tableau via la page administrateur
+     */
 
     public function getUsersList() {
         //Récupération des données en déterminant la requête souhaitée
@@ -198,6 +234,10 @@ class users extends Database {
             return array();
         }
     }
+
+    /**
+     * Méthode qui permet de supprimer un utilisateur via la page administrateur
+     */
 
     public function deleteUser(){
         $state = false;

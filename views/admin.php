@@ -30,15 +30,6 @@ include_once '../controllers/adminCtrl.php';
                         <li><a href="list-types-movements.php">Voir la liste des types et courants littéraire</a></li>
                         <li><a href="add-types-movements.php">Ajoutez des types et courants littéraire</a></li>
                         <li><a href="list-authors.php">Liste des auteurs</a></li>
-                        <a class="dropdown-button btn" href="#" data-activates="author">Drop Me!</a>
-                        <ul id="author" class="dropdown-content">
-                            <li><a href="#!">one</a></li>
-                            <li><a href="#!">two</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#!">three</a></li>
-                            <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                            <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-                        </ul>
                     </ul>
                 </div>
             </nav>

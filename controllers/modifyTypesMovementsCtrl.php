@@ -34,7 +34,10 @@ if (isset($_POST['modifyButtonType'])) {
             $formErrorType['type'] = 'Champs obligatoire';
         }
     }
+
+    //Si la comptabilisation du tableau contenant les messages d'erreur est égal à 0    
     if (count($formErrorType) == 0) {
+        //Modification du type de livre
         $type->modifyTypeOfBook();
     }
  }
@@ -56,7 +59,9 @@ if (isset($_POST['modifyButtonType'])) {
             $formErrorMovement['Literarymovement'] = 'Champs obligatoire';
         }
     }
+    //Si la comptabilisation du tableau contenant les messages d'erreur est égal à 0
     if (count($formErrorMovement) == 0) {
+        //Modification du courant littéraire
         $lm->modifyLiteraryMovement();
     }
  }

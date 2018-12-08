@@ -1,7 +1,10 @@
 <?php
 
 $typeofbooks = new typeofbooks();
+/* Affichage de tous les types de livres */
 $nameList = $typeofbooks->getNameOfLiteraryGenres();
+
+/* Permet de trier les livres selon leurs types */
 
 $books = new books();
 $books->idType = 1;
@@ -19,6 +22,8 @@ $booksPolicier = $books->detailsBooksByType();
 
 $books->idLm = 1;
 $booksHumanism = $books->detailsBooksByLiteraryMovement();
+$books->idLm = 2;
+$booksPleiade = $books->detailsBooksByLiteraryMovement();
 $successMessage = false;
 
 $formErrorBook = [];
@@ -99,6 +104,7 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['deleteBookButton'])) {
+    
 try {
 
     Database::getInstance()->beginTransaction();

@@ -65,7 +65,9 @@ if (isset($_POST['ranking'])) {
         $formError['ranking'] = 'Le rang ne peut pas dépasser 3.';
     } 
 }
-if (count($formError) == 0) {
-    $users->modifyUser();
-}
+    //Si la comptabilisation du tableau est égal à 0
+    if (count($formError) == 0) {
+        //Modification de l'utilisateur
+        $users->modifyUser();
+    }
 }

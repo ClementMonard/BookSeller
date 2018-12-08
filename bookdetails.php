@@ -52,8 +52,12 @@ include_once 'controllers/booksCtrl.php';
                             </p>
                         </div>
                         <div class="card-action">
-                            <a href="http://amazon.fr">Amazon</a>
-                            <button name="addToFavorite" class="btn" type="submit" href="#">Ajoutez ce livre au favoris</button>
+                            <div class="row">
+                            <a class="col l7 s12" href="http://amazon.fr">Achetez sur AMAZON</a>
+                            <form method="POST" action="">
+                            <button name="addToFavorite" class="btn" type="submit">Ajoutez à la liste</button>
+                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,6 +77,11 @@ include_once 'controllers/booksCtrl.php';
                 </div>
                 <?php } else { ?>
                     <p>Pour pouvoir laisser un commentaire, vous devez être connecté.</p>
+                <?php } ?>
+                <?php if ($displayBooks->countMessage >= 1) { ?>
+                    <p>Il y a <?= $displayBooks->countMessage ?> commentaires sur ce livre.</p>
+                <?php } else { ?>
+                    <p>Il n'y a aucun commentaire sur ce livre, soyez le premier à commenter.</p>
                 <?php } ?>
                 <?php foreach ($displayAllComments AS $displayComments) { ?>
                 <div class="comment-wrap">

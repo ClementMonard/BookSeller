@@ -1,5 +1,5 @@
 <?php
-
+//Déclaration des tableaux contenant les messages de succès et d'erreur
 $formError = [];
 $successRegistration = [];
 
@@ -29,16 +29,20 @@ if (isset($_POST['submitForm'])) {
     }
 }
 
+//Si la comptabilisation du tableau d'erreur est égale à 0
 if (count($formError) == 0 && isset($_POST['submitForm'])) {
     $user = new users();
-    $user->checkingIfTheUserAlreadyExists();
+    //Permet de vérifier si l'utilisateur est déjà enregistré en base
+    $check = $user->checkingIfTheUserAlreadyExists();
+    if ($check == 0) {
     $user->name = $name;
     $user->mail = $mail;
     $user->password = $password;
+    //Ajout de l'utilisateur dans la base de données
     if ($user->addUserToDatabase()) {
-    $successRegistration['register'] = 'Inscription réussie ! Bienvenue';
-    header('location:index.php');
-    exit;
-     var_dump($successRegistration);
-    } 
+        $successRegistration['register'] = 'Inscription réussie ! Bienvenue';
+        header('location:index.php');
+        exit;
+        } 
+    }
 }

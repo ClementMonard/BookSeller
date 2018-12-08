@@ -1,11 +1,15 @@
 <?php 
 
+//Déclaration du tableau stockant les messages d'erreur
 $formErrorAuthor = [];
 
 $listAuthors = new author();
 $displayAuthorsList = $listAuthors->getValueOfAuthors();
 
+
+//Si l'id existe
 if (isset($_GET['id'])) {
+    //Attribution de l'id récupéré grâce au get dans l'attribut id de la classe author
     $listAuthors->id = $_GET['id'];
     $displayAuthorsDetails = $listAuthors->displayAuthorsDetails();
 }

@@ -20,12 +20,13 @@ include_once 'controllers/typeofbooksCtrl.php';
     <li><p class="center-align">Types de livres</p></li>
     <?php foreach ($nameList AS $typesList) { ?>
     <li><a href="#<?= $typesList->type ?>" id="redirection<?= $typesList->type ?>"><?= $typesList->type ?></a></li>
+    <div class="divider"></div>
     <?php } ?>
-    <li><div class="divider"></div></li>
     <li><p class="center-align">Courants littéraire</p></li>
     <?php foreach ($lmList AS $literaryMovementsList) { ?>
-        <li><a href="#<?= $literaryMovementsList->Literarymovement ?>" id="redirection<?= $literaryMovementsList->Literarymovement ?>"><?= $literaryMovementsList->Literarymovement ?></a></li>
-    <?php } ?>
+    <li><a href="#<?= $literaryMovementsList->Literarymovement ?>" id="redirection<?= $literaryMovementsList->Literarymovement ?>"><?= $literaryMovementsList->Literarymovement ?></a></li>
+    <div class="divider"></div>
+    <?php } ?>
   </ul>
   <div class="container">
   <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i>  Vous souhaitez filtrer ? Cliquez-ici</a>
